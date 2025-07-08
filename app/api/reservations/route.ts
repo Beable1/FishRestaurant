@@ -13,7 +13,13 @@ export async function POST(req: NextRequest) {
   try {
     const sectionId = 'indoor'
     const tableId = 'table1'
-    const startAt = new Date(`${date}T${time}`)
+
+    const [timePart, meridiem] = time.split(' ')
+    let [hours, minutes] = timePart.split(':').map(Number)
+    if (meridiem?.toUpperCase() === 'PM' && hours < 12) hours += 12
+    if (meridiem?.toUpperCase() === 'AM' && hours === 12) hours = 0
+    const startAt = new Date(`${date}T${String(hours).padStart(2, '0')}:${minutes}`)
+
     const slotId = startAt
       .toISOString()
       .replace(/[-:]/g, '')
