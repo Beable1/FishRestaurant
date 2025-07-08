@@ -22,11 +22,33 @@ export function Reservation() {
     requests: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Reservation submitted:", formData)
-    alert("Thank you! Your reservation request has been submitted. We'll contact you shortly to confirm.")
+    try {
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        alert("Thank you! Your reservation request has been submitted.")
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
+          guests: '',
+          requests: '',
+        })
+      } else {
+        console.error(await res.text())
+        alert('Failed to submit reservation.')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Failed to submit reservation.')
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {
