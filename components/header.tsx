@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Fish, Phone, MapPin, Clock, Menu, X } from "lucide-react"
+import Image from "next/image"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -68,17 +69,33 @@ export function Header() {
             {/* Logo */}
             <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection("hero")}>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-teal-500 rounded-full blur-lg opacity-30 animate-pulse"></div>
-                <div className="relative bg-gradient-to-r from-blue-500 to-teal-600 p-3 rounded-full">
-                  <Fish className="h-8 w-8 text-white" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-teal-500 rounded-full blur-lg opacity-50 animate-pulse p-6 ml-6"></div>
+                
+
+                 <Image
+                    src="/logo.jpg"
+                    alt="Fish Restaurant logosu"
+                    width={192}      // en yüksek olası genişlik
+                    height={64}
+                    className="w-24 sm:w-32 md:w-32 lg:w-32 h-auto
+                                    /* her yanda margin */
+                              p-2 sm:p-3"     /* iç boşluk (padding) */
+
+                    priority
+                  />
+              </div>
+              {/* < 768 px’te gizli, ≥ 768 px’te blok eleman */}
+                <div className="hidden md:block">
+                  <h1 className="text-2xl md:text-3xl font-bold
+                                bg-gradient-to-r from-blue-600 to-teal-600
+                                bg-clip-text text-transparent">
+                    Poyrazköy Balıkçısı
+                  </h1>
+
+                  {/* İstersen tagline da yalnızca md+ görünür: */}
+                  <p className="text-xs text-slate-500 -mt-1">Fresh Seafood Restaurant</p>
                 </div>
-              </div>
-              <div>
-                <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                  Ocean's Catch
-                </h1>
-                <p className="text-xs text-slate-500 -mt-1">Fresh Seafood Restaurant</p>
-              </div>
+
             </div>
 
             {/* Desktop Navigation */}
