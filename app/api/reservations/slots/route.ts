@@ -12,6 +12,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Missing date' }, { status: 400 });
   }
 
+
   const availability = await slotAvailability(section, date, guests);
   return NextResponse.json({ available });
+
 }
