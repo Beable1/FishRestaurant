@@ -75,14 +75,19 @@ const handleInputChange = (field: string, value: string) => {
   setFormData((prev) => ({
     ...prev,
     [field]: value,
-    ...(field === 'date' || field === 'section' ? { time: '' } : {}),
+    ...(field === 'date' || field === 'section' || field === 'guests' ? { time: '' } : {}),
   }))
 }
 
   useEffect(() => {
-    if (!formData.date) return
+    if (!formData.date || !formData.guests) return
     setLoadingTimes(true)
-    fetch(`/api/reservations/slots?date=${formData.date}&section=${formData.section}`)
+    const params = new URLSearchParams({
+      date: formData.date,
+      section: formData.section,
+      guests: formData.guests,
+    })
+    fetch(`/api/reservations/slots?${params.toString()}`)
       .then((r) => r.json())
       .then((data) => {
         const avail: Record<string, boolean> = data.available || {}
@@ -92,7 +97,7 @@ const handleInputChange = (field: string, value: string) => {
         setTimes(TIME_OPTIONS.map((t) => ({ value: t, available: false })))
       })
       .finally(() => setLoadingTimes(false))
-  }, [formData.date, formData.section])
+  }, [formData.date, formData.section, formData.guests])
 
   return (
     <section id="reservation" className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
