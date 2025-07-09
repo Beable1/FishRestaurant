@@ -2,20 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
 import { Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'crypto';
-
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import cpf from 'dayjs/plugin/customParseFormat';
-dayjs.extend(utc); dayjs.extend(cpf);
-
-function parse(date: string, time: string) {
-  const f = [
-    'YYYY-MM-DD HH:mm', 'YYYY-MM-DD HH:mm:ss',
-    'YYYY-MM-DD hh:mm A', 'YYYY-MM-DD hh:mm:ss A',
-    'YYYY-MM-DD h:mm A',  'YYYY-MM-DD h:mm:ss A',
-  ];
-  return dayjs.utc(`${date} ${time}`.trim(), f, true);
-}
+import { parse, findTablesForSlot } from '@/lib/reservationUtils';
 
 const clean = (o: Record<string, any>) =>
   Object.fromEntries(
@@ -28,7 +15,6 @@ export async function POST(req: NextRequest) {
   const {
     date, time,
     section = 'indoor',
-    table   = 't01',
     name, phone, email,
     guests, requests,
   } = await req.json();
@@ -40,35 +26,44 @@ export async function POST(req: NextRequest) {
   if (!start.isValid())
     return NextResponse.json({ error: 'Invalid date/time' }, { status: 400 });
 
-  const slotId  = 's_' + start.format('YYYYMMDDHH');    // s_2025071018
+  const slotId  = 's_' + start.format('YYYYMMDDHH');
   const startAt = start.toDate();
 
-  const tableRef = adminDb.doc(`sections/${section}/tables/${table}`);
-  const slotRef  = tableRef.collection('slots').doc(slotId);
+  const g = guests ? Number(String(guests).replace('+','')) : 1;
+  const tableIds = await findTablesForSlot(section, slotId, g);
+  if (!tableIds)
+    return NextResponse.json({ error: 'No tables available' }, { status: 409 });
+
+  const tableRefs = tableIds.map(id => adminDb.doc(`sections/${section}/tables/${id}`));
+  const slotRefs  = tableRefs.map(ref => ref.collection('slots').doc(slotId));
 
   const payload = clean({
-    userId   : randomUUID(),               // rastgele benzersiz kimlik
+    userId   : randomUUID(),
     email,
     status   : 'pending',
     startAt  : Timestamp.fromDate(startAt),
     createdAt: Timestamp.now(),
     name,
     phone,
-    guests : guests ? Number(guests) : undefined,
+    guests : g,
     requests,
+    tables: tableIds,
   });
 
   try {
     await adminDb.runTransaction(async tx => {
-      // Masa belgesindeki harita dolu mu?
-      const tblSnap = await tx.get(tableRef);
-      if (tblSnap.exists && tblSnap.get(`booked.${slotId}`))
-        throw new Error('ALREADY_BOOKED');
+      for (const ref of tableRefs) {
+        const snap = await tx.get(ref);
+        if (snap.exists && snap.get(`booked.${slotId}`)) {
+          throw new Error('ALREADY_BOOKED');
+        }
+      }
 
-      // Slot belgesi
-      tx.set(slotRef, payload);
-      // Haritaya işaret
-      tx.update(tableRef, { [`booked.${slotId}`]: true });
+      tableRefs.forEach((ref, idx) => {
+        const slotRef = slotRefs[idx];
+        tx.set(slotRef, payload);
+        tx.update(ref, { [`booked.${slotId}`]: true });
+      });
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });
