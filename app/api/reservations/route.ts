@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminDb } from '@/lib/firebaseAdmin';
-import { Timestamp, FieldValue } from 'firebase-admin/firestore';
+import { Timestamp } from 'firebase-admin/firestore';
 import { randomUUID } from 'crypto';
 
 import dayjs from 'dayjs';
@@ -42,7 +42,6 @@ export async function POST(req: NextRequest) {
 
   const slotId  = 's_' + start.format('YYYYMMDDHH');    // s_2025071018
   const startAt = start.toDate();
-  const expires = start.add(2, 'h').toDate();           // +2 h
 
   const tableRef = adminDb.doc(`sections/${section}/tables/${table}`);
   const slotRef  = tableRef.collection('slots').doc(slotId);
@@ -52,7 +51,6 @@ export async function POST(req: NextRequest) {
     email,
     status   : 'pending',
     startAt  : Timestamp.fromDate(startAt),
-    expiresAt: Timestamp.fromDate(expires), // TTL alanı
     createdAt: Timestamp.now(),
     name,
     phone,

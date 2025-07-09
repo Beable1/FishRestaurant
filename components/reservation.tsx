@@ -18,6 +18,7 @@ export function Reservation() {
     phone: "",
     date: "",
     time: "",
+    section: "indoor",
     guests: "",
     requests: "",
   })
@@ -38,6 +39,7 @@ export function Reservation() {
           phone: '',
           date: '',
           time: '',
+          section: 'indoor',
           guests: '',
           requests: '',
         })
@@ -173,6 +175,21 @@ export function Reservation() {
                         </SelectContent>
                       </Select>
                     </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="section" className="text-slate-700 font-medium">
+                      Section *
+                    </Label>
+                    <Select onValueChange={(value) => handleInputChange("section", value)}>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Choose section" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="indoor">Indoor</SelectItem>
+                        <SelectItem value="outdoor">Outdoor</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
