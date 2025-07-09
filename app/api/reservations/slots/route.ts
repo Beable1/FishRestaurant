@@ -14,6 +14,6 @@ export async function GET(req: NextRequest) {
 
 
   const availability = await slotAvailability(section, date, guests);
-  return NextResponse.json({ available });
+  return NextResponse.json({ available: availability });
 
 }
