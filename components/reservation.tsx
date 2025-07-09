@@ -2,13 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Calendar, Clock, Users } from "lucide-react"
 
 export function Reservation() {
@@ -22,6 +23,23 @@ export function Reservation() {
     guests: "",
     requests: "",
   })
+
+  const TIME_OPTIONS = [
+    "5:00 PM",
+    "5:30 PM",
+    "6:00 PM",
+    "6:30 PM",
+    "7:00 PM",
+    "7:30 PM",
+    "8:00 PM",
+    "8:30 PM",
+    "9:00 PM",
+  ]
+
+  const [times, setTimes] = useState(
+    TIME_OPTIONS.map((t) => ({ value: t, available: true }))
+  )
+  const [loadingTimes, setLoadingTimes] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -53,9 +71,28 @@ export function Reservation() {
     }
   }
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+const handleInputChange = (field: string, value: string) => {
+  setFormData((prev) => ({
+    ...prev,
+    [field]: value,
+    ...(field === 'date' || field === 'section' ? { time: '' } : {}),
+  }))
+}
+
+  useEffect(() => {
+    if (!formData.date) return
+    setLoadingTimes(true)
+    fetch(`/api/reservations/slots?date=${formData.date}&section=${formData.section}`)
+      .then((r) => r.json())
+      .then((data) => {
+        const avail: Record<string, boolean> = data.available || {}
+        setTimes(TIME_OPTIONS.map((t) => ({ value: t, available: !!avail[t] })))
+      })
+      .catch(() => {
+        setTimes(TIME_OPTIONS.map((t) => ({ value: t, available: false })))
+      })
+      .finally(() => setLoadingTimes(false))
+  }, [formData.date, formData.section])
 
   return (
     <section id="reservation" className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
@@ -140,22 +177,26 @@ export function Reservation() {
                       <Label htmlFor="time" className="text-slate-700 font-medium">
                         Time *
                       </Label>
-                      <Select onValueChange={(value) => handleInputChange("time", value)}>
-                        <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Select time" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="5:00 PM">5:00 PM</SelectItem>
-                          <SelectItem value="5:30 PM">5:30 PM</SelectItem>
-                          <SelectItem value="6:00 PM">6:00 PM</SelectItem>
-                          <SelectItem value="6:30 PM">6:30 PM</SelectItem>
-                          <SelectItem value="7:00 PM">7:00 PM</SelectItem>
-                          <SelectItem value="7:30 PM">7:30 PM</SelectItem>
-                          <SelectItem value="8:00 PM">8:00 PM</SelectItem>
-                          <SelectItem value="8:30 PM">8:30 PM</SelectItem>
-                          <SelectItem value="9:00 PM">9:00 PM</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      {loadingTimes ? (
+                        <Skeleton className="h-10 w-full mt-1" />
+                      ) : (
+                        <Select onValueChange={(value) => handleInputChange("time", value)}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select time" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {times.map((t) => (
+                              <SelectItem
+                                key={t.value}
+                                value={t.value}
+                                disabled={!t.available}
+                              >
+                                <span className={!t.available ? "text-red-500" : ""}>{t.value}</span>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     </div>
                     <div>
                       <Label htmlFor="guests" className="text-slate-700 font-medium">
