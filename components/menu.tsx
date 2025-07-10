@@ -8,167 +8,167 @@ import { ChefHat, Fish, Utensils, Beef, Waves, Grid3X3, ChevronLeft, ChevronRigh
 
 const menuItems = [
   {
-    category: "Appetizers & Small Plates",
+    category: "Başlangıçlar & Küçük Porsiyonlar",
     id: "appetizers",
     icon: ChefHat,
     color: "from-orange-400 to-red-500",
     items: [
       {
-        name: "New England Clam Chowder",
-        description: "Creamy traditional chowder with tender clams and fresh herbs",
+        name: "New England İstiridye Çorbası",
+        description: "Tender istiridyeler ve taze otlarla geleneksel kremalı çorba",
         price: "$12",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Coconut Shrimp",
-        description: "Jumbo shrimp in crispy coconut coating with mango dipping sauce",
+        name: "Hindistan Cevizli Karides",
+        description: "Mango soslu çıtır hindistan cevizi kaplamasında jumbo karides",
         price: "$16",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Crab Cakes",
-        description: "Maryland-style crab cakes with remoulade sauce",
+        name: "Yengeç Köftesi",
+        description: "Remoulade soslu Maryland tarzı yengeç köftesi",
         price: "$18",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Stuffed Mushrooms",
-        description: "Button mushrooms stuffed with crab meat and herbs",
+        name: "Doldurulmuş Mantar",
+        description: "Yengeç eti ve otlarla doldurulmuş düğme mantarları",
         price: "$14",
         image: "/placeholder.svg?height=200&width=300",
       },
     ],
   },
   {
-    category: "Raw Bar & Sashimi",
+    category: "Çiğ Bar & Sashimi",
     id: "raw-bar",
     icon: Waves,
     color: "from-blue-400 to-cyan-500",
     items: [
       {
-        name: "Oyster Selection",
-        description: "Daily selection of East and West coast oysters",
-        price: "$3-5 each",
+        name: "İstiridye Seçimi",
+        description: "Doğu ve Batı kıyısı istiridyelerinin günlük seçimi",
+        price: "$3-5 adet",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Seafood Tower",
-        description: "Lobster, crab, shrimp, oysters, and clams for two",
+        name: "Deniz Ürünleri Kulesi",
+        description: "İki kişilik ıstakoz, yengeç, karides, istiridye ve midye",
         price: "$85",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Tuna Sashimi",
-        description: "Fresh yellowfin tuna with wasabi, pickled ginger, and soy",
+        name: "Ton Balığı Sashimi",
+        description: "Wasabi, turşu zencefil ve soya ile taze sarı yüzgeçli ton balığı",
         price: "$22",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Salmon Tartare",
-        description: "Fresh salmon with avocado and citrus dressing",
+        name: "Somon Tartar",
+        description: "Avokado ve narenciye sosu ile taze somon",
         price: "$20",
         image: "/placeholder.svg?height=200&width=300",
       },
     ],
   },
   {
-    category: "Signature Entrees",
+    category: "Özel Ana Yemekler",
     id: "entrees",
     icon: Fish,
     color: "from-emerald-400 to-teal-500",
     items: [
       {
-        name: "Grilled Atlantic Salmon",
-        description: "Fresh Atlantic salmon with lemon herb butter and seasonal vegetables",
+        name: "Izgara Atlantik Somonu",
+        description: "Limon otlu tereyağı ve mevsim sebzeleri ile taze Atlantik somonu",
         price: "$28",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Lobster Thermidor",
-        description: "Classic preparation with cognac cream sauce, served with rice pilaf",
+        name: "Istakoz Thermidor",
+        description: "Konyak kremalı sos ile klasik hazırlama, pilav pilavı ile servis",
         price: "$45",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Pan-Seared Halibut",
-        description: "Alaskan halibut with roasted tomato coulis and grilled asparagus",
+        name: "Tavada Halibut",
+        description: "Kızarmış domates koulis ve ızgara kuşkonmaz ile Alaska halibutu",
         price: "$32",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
-        name: "Grilled Sea Bass",
-        description: "Mediterranean sea bass with olive tapenade",
+        name: "Izgara Deniz Levreği",
+        description: "Zeytin tapenad ile Akdeniz deniz levreği",
         price: "$30",
         image: "/placeholder.svg?height=200&width=300",
       },
     ],
   },
   {
-    category: "Pasta & Risotto",
+    category: "Makarna & Risotto",
     id: "pasta",
     icon: Utensils,
     color: "from-purple-400 to-pink-500",
     items: [
       {
-        name: "Seafood Linguine",
-        description: "Fresh linguine with shrimp, scallops, mussels in white wine sauce",
+        name: "Deniz Ürünleri Linguine",
+        description: "Beyaz şarap sosunda karides, tarak, midye ile taze linguine",
         price: "$26",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Lobster Risotto",
-        description: "Creamy arborio rice with fresh lobster meat and herbs",
+        name: "Istakoz Risotto",
+        description: "Taze ıstakoz eti ve otlarla kremalı arborio pirinci",
         price: "$34",
         image: "/placeholder.svg?height=200&width=300",
         popular: true,
       },
       {
         name: "Cioppino",
-        description: "San Francisco-style seafood stew with sourdough bread",
+        description: "Ekşi maya ekmek ile San Francisco tarzı deniz ürünleri güveci",
         price: "$29",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Crab Ravioli",
-        description: "Handmade ravioli filled with fresh crab meat",
+        name: "Yengeç Ravioli",
+        description: "Taze yengeç eti ile doldurulmuş el yapımı ravioli",
         price: "$28",
         image: "/placeholder.svg?height=200&width=300",
       },
     ],
   },
   {
-    category: "Land & Sea",
+    category: "Kara & Deniz",
     id: "land-sea",
     icon: Beef,
     color: "from-amber-400 to-orange-500",
     items: [
       {
         name: "Surf & Turf",
-        description: "Grilled filet mignon with lobster tail and garlic mashed potatoes",
+        description: "Sarımsaklı patates püresi ve ıstakoz kuyruğu ile ızgara fileto mignon",
         price: "$52",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Blackened Chicken",
-        description: "Cajun-spiced chicken breast with coconut rice and vegetables",
+        name: "Kajun Tavuk",
+        description: "Hindistan cevizi pirinci ve sebzeler ile Cajun baharatlı tavuk göğsü",
         price: "$24",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Grilled Ribeye",
-        description: "12oz ribeye steak with herb butter and roasted vegetables",
+        name: "Izgara Ribeye",
+        description: "Otlu tereyağı ve kızarmış sebzeler ile 12oz ribeye biftek",
         price: "$38",
         image: "/placeholder.svg?height=200&width=300",
       },
       {
-        name: "Lamb Chops",
-        description: "Herb-crusted lamb chops with mint sauce",
+        name: "Kuzu Pirzola",
+        description: "Nane sosu ile ot kaplı kuzu pirzolaları",
         price: "$42",
         image: "/placeholder.svg?height=200&width=300",
       },
@@ -198,92 +198,59 @@ function CategorySlider({ category }: { category: (typeof menuItems)[0] }) {
     <div className="relative">
       {/* Category Header */}
       <div className="flex items-center justify-between mb-6 p-4 lg:p-6 bg-gradient-to-r from-white to-slate-50 rounded-xl shadow-sm border border-slate-200">
-        <div className="flex items-center gap-4">
-          <div className={`p-3 rounded-full bg-gradient-to-r ${category.color}`}>
-            <category.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
+        <div className="flex items-center space-x-3">
+          <div className={`p-3 rounded-lg bg-gradient-to-r ${category.color}`}>
+            <category.icon className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-slate-800">{category.category}</h3>
-            <p className="text-slate-600 text-sm lg:text-base">{category.items.length} delicious options</p>
+            <h3 className="text-xl lg:text-2xl font-bold text-slate-800">{category.category}</h3>
+            <p className="text-slate-600 text-sm">{category.items.length} seçenek</p>
           </div>
         </div>
-
-        {/* Navigation Arrows */}
-        <div className="hidden sm:flex items-center gap-2">
+        <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            size="icon"
+            size="sm"
             onClick={goToPrevious}
-            className="h-10 w-10 rounded-full border-slate-300 hover:bg-slate-50 bg-transparent"
-            disabled={currentIndex === 0}
+            className="rounded-full w-8 h-8 p-0"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
-            size="icon"
+            size="sm"
             onClick={goToNext}
-            className="h-10 w-10 rounded-full border-slate-300 hover:bg-slate-50 bg-transparent"
-            disabled={currentIndex >= category.items.length - itemsPerView.desktop}
+            className="rounded-full w-8 h-8 p-0"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
-      {/* Slider Container */}
-      <div className="relative overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out gap-4 lg:gap-6"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / itemsPerView.desktop)}%)`,
-          }}
-        >
-          {category.items.map((item) => (
-            <div key={item.name} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3">
-              <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 bg-white border-0 shadow-lg h-full">
-                <div className="relative">
-                  <img
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.name}
-                    className="w-full h-48 lg:h-56 object-cover"
-                  />
-                  {item.popular && (
-                    <Badge className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
-                      Popular
-                    </Badge>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                </div>
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start gap-2">
-                    <CardTitle className="text-lg lg:text-xl text-slate-800 font-bold leading-tight">
-                      {item.name}
-                    </CardTitle>
-                    <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent flex-shrink-0">
-                      {item.price}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-slate-600 leading-relaxed text-sm lg:text-base">{item.description}</p>
-                </CardContent>
-              </Card>
+      {/* Menu Items Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {category.items.slice(currentIndex, currentIndex + itemsPerView.desktop).map((item, index) => (
+          <Card key={item.name} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+            <div className="relative overflow-hidden rounded-t-lg">
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              {item.popular && (
+                <Badge className="absolute top-3 right-3 bg-orange-500 text-white">
+                  Popüler
+                </Badge>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile Navigation Dots */}
-      <div className="flex justify-center mt-6 gap-2 sm:hidden">
-        {Array.from({ length: Math.ceil(category.items.length / itemsPerView.mobile) }).map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? "bg-blue-600 scale-125" : "bg-slate-300"
-            }`}
-            onClick={() => setCurrentIndex(index)}
-          />
+            <CardContent className="p-4">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="font-semibold text-slate-800 text-lg">{item.name}</h4>
+                <span className="text-lg font-bold text-blue-600">{item.price}</span>
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed">{item.description}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
@@ -291,63 +258,53 @@ function CategorySlider({ category }: { category: (typeof menuItems)[0] }) {
 }
 
 export function Menu() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-
-  const filteredCategories = selectedCategory
-    ? menuItems.filter((category) => category.id === selectedCategory)
-    : menuItems
+  const [selectedCategory, setSelectedCategory] = useState(menuItems[0])
 
   return (
-    <section id="menu" className="py-12 lg:py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <section className="py-20 bg-gradient-to-br from-white via-slate-50 to-blue-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent mb-6">
-            Our Menu
-          </h2>
-          <p className="text-lg lg:text-xl text-slate-600 max-w-2xl mx-auto">
-            Discover our carefully curated selection of the finest seafood, prepared with passion and served with pride.
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center mb-6">
+            <Utensils className="h-8 w-8 text-blue-600 mr-3" />
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
+              Menümüz
+            </h2>
+          </div>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Şefimizin özenle seçtiği en taze malzemelerle hazırlanan özel lezzetlerimizi keşfedin
           </p>
         </div>
 
-        {/* Category Filter - Mobile Responsive */}
-        <div className="flex flex-wrap justify-center gap-2 lg:gap-4 mb-12 lg:mb-16">
-          <Button
-            onClick={() => setSelectedCategory(null)}
-            variant={selectedCategory === null ? "default" : "outline"}
-            className={`px-4 lg:px-6 py-2 lg:py-3 rounded-full font-semibold transition-all duration-300 text-sm lg:text-base ${
-              selectedCategory === null
-                ? "bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-lg transform scale-105"
-                : "hover:bg-blue-50 hover:border-blue-300"
-            }`}
-          >
-            <Grid3X3 className="h-4 w-4 mr-2" />
-            All Categories
-          </Button>
+        {/* Category Navigation */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {menuItems.map((category) => (
             <Button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              variant={selectedCategory === category.id ? "default" : "outline"}
-              className={`px-4 lg:px-6 py-2 lg:py-3 rounded-full font-semibold transition-all duration-300 text-sm lg:text-base ${
-                selectedCategory === category.id
-                  ? `bg-gradient-to-r ${category.color} text-white shadow-lg transform scale-105`
+              variant={selectedCategory.id === category.id ? "default" : "outline"}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                selectedCategory.id === category.id
+                  ? "bg-gradient-to-r from-blue-600 to-teal-600 text-white shadow-lg transform scale-105"
                   : "hover:bg-blue-50 hover:border-blue-300"
               }`}
             >
               <category.icon className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">{category.category}</span>
-              <span className="sm:hidden">{category.category.split(" ")[0]}</span>
+              {category.category}
             </Button>
           ))}
         </div>
 
-        {/* Menu Categories with Sliders */}
-        <div className="max-w-7xl mx-auto space-y-12 lg:space-y-16">
-          {filteredCategories.map((category) => (
-            <div key={category.id} className="scroll-mt-8">
-              <CategorySlider category={category} />
-            </div>
-          ))}
+        {/* Menu Content */}
+        <CategorySlider category={selectedCategory} />
+
+        {/* Special Note */}
+        <div className="text-center mt-16 p-6 bg-gradient-to-r from-blue-50 to-teal-50 rounded-xl border border-blue-200">
+          <h3 className="text-2xl font-bold text-slate-800 mb-3">Özel Not</h3>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            Menümüz mevsimsel değişikliklere tabidir. Günün özel yemekleri için lütfen personelimize danışın. 
+            Tüm yemeklerimiz taze, yerel malzemelerle hazırlanmaktadır.
+          </p>
         </div>
       </div>
     </section>

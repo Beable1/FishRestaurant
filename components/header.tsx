@@ -34,12 +34,12 @@ export function Header() {
   const pathname = usePathname()
 
   const navigationItems = [
-    { label: "Home", section: "hero", href: "/#hero" },
-    { label: "About", section: "about", href: "/#about" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "Menu", href: "/menu" },
-    { label: "Reservations", section: "reservation", href: "/#reservation" },
-    { label: "Contact", section: "contact", href: "/#contact" },
+    { label: "Ana Sayfa", section: "hero", href: "/#hero" },
+    { label: "Hakkımızda", section: "about", href: "/#about" },
+    { label: "Galeri", href: "/gallery" },
+    { label: "Menü", href: "/menu" },
+    { label: "Rezervasyon", section: "reservation", href: "/#reservation" },
+    { label: "İletişim", section: "contact", href: "/#contact" },
 
   ]
 
@@ -60,7 +60,7 @@ export function Header() {
           </div>
           <div className="flex items-center space-x-1">
             <Clock className="h-4 w-4" />
-            <span>Open Daily 5:00 PM - 11:00 PM</span>
+            <span>Her Gün Açık 17:00 - 23:00</span>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export function Header() {
                     priority
                   />
               </div>
-              {/* < 768 px’te gizli, ≥ 768 px’te blok eleman */}
+              {/* < 768 px'te gizli, ≥ 768 px'te blok eleman */}
                 <div className="hidden md:block">
                   <h1 className="text-2xl md:text-3xl font-bold
                                 bg-gradient-to-r from-blue-600 to-teal-600
@@ -102,7 +102,7 @@ export function Header() {
                   </h1>
 
                   {/* İstersen tagline da yalnızca md+ görünür: */}
-                  <p className="text-xs text-slate-500 -mt-1">Fresh Seafood Restaurant</p>
+                  <p className="text-xs text-slate-500 -mt-1">Taze Deniz Ürünleri Restoranı</p>
                 </div>
 
             </div>
@@ -147,7 +147,7 @@ export function Header() {
 
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                Reserve Table
+                Masa Rezervasyonu
               </Button>
             </div>
 
@@ -200,9 +200,9 @@ export function Header() {
 
                       setIsMobileMenuOpen(false)
                     }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 rounded-full font-semibold"
+                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 rounded-lg font-semibold shadow-lg"
                   >
-                    Reserve Table
+                    Masa Rezervasyonu
                   </Button>
                 </div>
               </nav>

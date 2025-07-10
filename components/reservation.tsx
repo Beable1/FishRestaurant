@@ -25,15 +25,15 @@ export function Reservation() {
   })
 
   const TIME_OPTIONS = [
-    "5:00 PM",
-    "5:30 PM",
-    "6:00 PM",
-    "6:30 PM",
-    "7:00 PM",
-    "7:30 PM",
-    "8:00 PM",
-    "8:30 PM",
-    "9:00 PM",
+    "17:00",
+    "17:30",
+    "18:00",
+    "18:30",
+    "19:00",
+    "19:30",
+    "20:00",
+    "20:30",
+    "21:00",
   ]
 
   const [times, setTimes] = useState(
@@ -50,7 +50,7 @@ export function Reservation() {
         body: JSON.stringify(formData),
       })
       if (res.ok) {
-        alert("Thank you! Your reservation request has been submitted.")
+        alert("Teşekkürler! Rezervasyon talebiniz gönderildi.")
         setFormData({
           name: '',
           email: '',
@@ -63,11 +63,11 @@ export function Reservation() {
         })
       } else {
         console.error(await res.text())
-        alert('Failed to submit reservation.')
+        alert('Rezervasyon gönderilemedi.')
       }
     } catch (err) {
       console.error(err)
-      alert('Failed to submit reservation.')
+      alert('Rezervasyon gönderilemedi.')
     }
   }
 
@@ -103,10 +103,9 @@ const handleInputChange = (field: string, value: string) => {
     <section id="reservation" className="py-20 bg-gradient-to-br from-blue-50 to-teal-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Make a Reservation</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">Rezervasyon Yap</h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Reserve your table for an unforgettable dining experience. We recommend booking in advance, especially for
-            weekend evenings.
+            Unutulmaz bir yemek deneyimi için masanızı rezerve edin. Özellikle hafta sonu akşamları için önceden rezervasyon yapmanızı öneririz.
           </p>
         </div>
 
@@ -116,7 +115,7 @@ const handleInputChange = (field: string, value: string) => {
               <CardHeader className="bg-blue-600 text-white">
                 <CardTitle className="text-2xl flex items-center">
                   <Calendar className="mr-3 h-6 w-6" />
-                  Reservation Details
+                  Rezervasyon Detayları
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-8">
@@ -124,7 +123,7 @@ const handleInputChange = (field: string, value: string) => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="name" className="text-slate-700 font-medium">
-                        Full Name *
+                        Ad Soyad *
                       </Label>
                       <Input
                         id="name"
@@ -136,7 +135,7 @@ const handleInputChange = (field: string, value: string) => {
                     </div>
                     <div>
                       <Label htmlFor="email" className="text-slate-700 font-medium">
-                        Email *
+                        E-posta *
                       </Label>
                       <Input
                         id="email"
@@ -151,7 +150,7 @@ const handleInputChange = (field: string, value: string) => {
 
                   <div>
                     <Label htmlFor="phone" className="text-slate-700 font-medium">
-                      Phone Number *
+                      Telefon Numarası *
                     </Label>
                     <Input
                       id="phone"
@@ -166,7 +165,7 @@ const handleInputChange = (field: string, value: string) => {
                   <div className="grid md:grid-cols-3 gap-4">
                     <div>
                       <Label htmlFor="date" className="text-slate-700 font-medium">
-                        Date *
+                        Tarih *
                       </Label>
                       <Input
                         id="date"
@@ -180,14 +179,14 @@ const handleInputChange = (field: string, value: string) => {
                     </div>
                     <div>
                       <Label htmlFor="time" className="text-slate-700 font-medium">
-                        Time *
+                        Saat *
                       </Label>
                       {loadingTimes ? (
                         <Skeleton className="h-10 w-full mt-1" />
                       ) : (
                         <Select onValueChange={(value) => handleInputChange("time", value)}>
                           <SelectTrigger className="mt-1">
-                            <SelectValue placeholder="Select time" />
+                            <SelectValue placeholder="Saat seçin" />
                           </SelectTrigger>
                           <SelectContent>
                             {times.map((t) => (
@@ -205,19 +204,18 @@ const handleInputChange = (field: string, value: string) => {
                     </div>
                     <div>
                       <Label htmlFor="guests" className="text-slate-700 font-medium">
-                        Guests *
+                        Kişi Sayısı *
                       </Label>
                       <Select onValueChange={(value) => handleInputChange("guests", value)}>
                         <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Party size" />
+                          <SelectValue placeholder="Kişi seçin" />
                         </SelectTrigger>
                         <SelectContent>
-                          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                             <SelectItem key={num} value={num.toString()}>
-                              {num} {num === 1 ? "Guest" : "Guests"}
+                              {num} kişi
                             </SelectItem>
                           ))}
-                          <SelectItem value="9+">9+ Guests</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -225,84 +223,86 @@ const handleInputChange = (field: string, value: string) => {
 
                   <div>
                     <Label htmlFor="section" className="text-slate-700 font-medium">
-                      Section *
+                      Bölüm Tercihi
                     </Label>
                     <Select onValueChange={(value) => handleInputChange("section", value)}>
                       <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Choose section" />
+                        <SelectValue placeholder="Bölüm seçin" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="indoor">Indoor</SelectItem>
-                        <SelectItem value="outdoor">Outdoor</SelectItem>
+                        <SelectItem value="indoor">İç Mekan</SelectItem>
+                        <SelectItem value="outdoor">Dış Mekan</SelectItem>
+                        <SelectItem value="bar">Bar</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
                     <Label htmlFor="requests" className="text-slate-700 font-medium">
-                      Special Requests
+                      Özel İstekler
                     </Label>
                     <Textarea
                       id="requests"
                       value={formData.requests}
                       onChange={(e) => handleInputChange("requests", e.target.value)}
-                      placeholder="Dietary restrictions, special occasions, seating preferences..."
+                      placeholder="Özel isteklerinizi buraya yazabilirsiniz..."
                       className="mt-1"
                       rows={3}
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg">
-                    Submit Reservation Request
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 text-lg font-semibold shadow-lg"
+                  >
+                    Rezervasyon Onayla
                   </Button>
                 </form>
               </CardContent>
             </Card>
 
-            <div className="space-y-8">
-              <Card className="border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-4">
-                    <Clock className="h-6 w-6 text-blue-600 mr-3" />
-                    <h3 className="text-xl font-semibold text-slate-800">Hours</h3>
-                  </div>
-                  <div className="space-y-2 text-slate-600">
-                    <div className="flex justify-between">
-                      <span>Monday - Thursday</span>
-                      <span>5:00 PM - 10:00 PM</span>
+            <div className="space-y-6">
+              <Card className="shadow-lg border-0">
+                <CardHeader className="bg-gradient-to-r from-teal-600 to-blue-600 text-white">
+                  <CardTitle className="text-xl flex items-center">
+                    <Clock className="mr-3 h-5 w-5" />
+                    Çalışma Saatleri
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Pazartesi - Perşembe</span>
+                      <span className="text-slate-600">17:00 - 22:00</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Friday - Saturday</span>
-                      <span>5:00 PM - 11:00 PM</span>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Cuma - Cumartesi</span>
+                      <span className="text-slate-600">17:00 - 23:00</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Sunday</span>
-                      <span>4:00 PM - 9:00 PM</span>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Pazar</span>
+                      <span className="text-slate-600">16:00 - 21:00</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex items-center mb-4">
-                    <Users className="h-6 w-6 text-blue-600 mr-3" />
-                    <h3 className="text-xl font-semibold text-slate-800">Reservation Policy</h3>
-                  </div>
-                  <ul className="space-y-2 text-slate-600">
-                    <li>• Reservations recommended for parties of 2 or more</li>
-                    <li>• Large parties (8+) require advance notice</li>
-                    <li>• 15-minute grace period for late arrivals</li>
-                    <li>• Cancellations appreciated 2 hours in advance</li>
+              <Card className="shadow-lg border-0">
+                <CardHeader className="bg-gradient-to-r from-orange-600 to-red-600 text-white">
+                  <CardTitle className="text-xl flex items-center">
+                    <Users className="mr-3 h-5 w-5" />
+                    Rezervasyon Politikası
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <ul className="space-y-2 text-sm text-slate-600">
+                    <li>• Rezervasyonlar 30 dakika geçerlidir</li>
+                    <li>• 6 kişiden fazla gruplar için önceden arama yapın</li>
+                    <li>• Özel etkinlikler için 48 saat önceden haber verin</li>
+                    <li>• İptal için en az 2 saat önceden bilgi verin</li>
                   </ul>
                 </CardContent>
               </Card>
-
-              <div className="bg-blue-600 text-white p-6 rounded-lg">
-                <h3 className="text-xl font-semibold mb-2">Need immediate assistance?</h3>
-                <p className="mb-4">Call us directly for same-day reservations or special requests.</p>
-                <p className="text-2xl font-bold">(555) 123-FISH</p>
-              </div>
             </div>
           </div>
         </div>

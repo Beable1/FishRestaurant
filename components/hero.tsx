@@ -24,12 +24,11 @@ export function Hero() {
       <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
         <div className="flex items-center justify-center mb-6">
           <Fish className="h-16 w-16 text-blue-200 mr-4" />
-          <h1 className="text-5xl md:text-7xl font-bold">Ocean's Catch</h1>
+          <h1 className="text-5xl md:text-7xl font-bold">Okyanus'un Avı</h1>
         </div>
 
         <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-2xl mx-auto">
-          Experience the finest fresh seafood in an elegant waterfront setting. From ocean to table, we serve the catch
-          of the day with passion and expertise.
+          Zarif bir sahil manzarasında en taze deniz ürünlerinin tadını çıkarın. Okyanustan masaya, günün avını tutku ve uzmanlıkla servis ediyoruz.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -38,7 +37,7 @@ export function Hero() {
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 text-lg"
             onClick={() => document.getElementById("reservation")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Make Reservation
+            Rezervasyon Yap
           </Button>
           <Button
             size="lg"
@@ -46,7 +45,7 @@ export function Hero() {
             className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 text-lg bg-transparent"
             onClick={() => router.push("/menu")}
           >
-            View Menu
+            Menüyü Görüntüle
           </Button>
         </div>
 

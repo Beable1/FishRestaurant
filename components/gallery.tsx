@@ -19,109 +19,109 @@ const galleryImages: GalleryImage[] = [
   {
     id: "1",
     src: "/placeholder.svg?height=400&width=600",
-    alt: "Grilled Atlantic Salmon",
+    alt: "Izgara Atlantik Somonu",
     category: "food",
-    title: "Grilled Atlantic Salmon",
-    description: "Fresh Atlantic salmon with lemon herb butter",
+    title: "Izgara Atlantik Somonu",
+    description: "Limon otlu tereyağı ile taze Atlantik somonu",
     featured: true,
   },
   {
     id: "2",
     src: "/placeholder.svg?height=300&width=400",
-    alt: "Restaurant Interior",
+    alt: "Restoran İç Mekanı",
     category: "restaurant",
-    title: "Elegant Dining Room",
-    description: "Our beautifully appointed main dining area",
+    title: "Zarif Yemek Salonu",
+    description: "Güzelce döşenmiş ana yemek alanımız",
   },
   {
     id: "3",
     src: "/placeholder.svg?height=500&width=400",
-    alt: "Lobster Thermidor",
+    alt: "Istakoz Thermidor",
     category: "food",
-    title: "Lobster Thermidor",
-    description: "Classic preparation with cognac cream sauce",
+    title: "Istakoz Thermidor",
+    description: "Konyak kremalı sos ile klasik hazırlama",
     featured: true,
   },
   {
     id: "4",
     src: "/placeholder.svg?height=300&width=500",
-    alt: "Waterfront Terrace",
+    alt: "Sahil Terası",
     category: "restaurant",
-    title: "Waterfront Terrace",
-    description: "Dining with stunning ocean views",
+    title: "Sahil Terası",
+    description: "Muhteşem okyanus manzarası ile yemek",
   },
   {
     id: "5",
     src: "/placeholder.svg?height=400&width=400",
-    alt: "Chef at Work",
+    alt: "Çalışan Şef",
     category: "chef",
-    title: "Chef Martinez",
-    description: "Our head chef preparing the daily catch",
+    title: "Şef Martinez",
+    description: "Günün avını hazırlayan baş şefimiz",
   },
   {
     id: "6",
     src: "/placeholder.svg?height=350&width=500",
-    alt: "Seafood Tower",
+    alt: "Deniz Ürünleri Kulesi",
     category: "food",
-    title: "Seafood Tower",
-    description: "Fresh oysters, lobster, and seasonal shellfish",
+    title: "Deniz Ürünleri Kulesi",
+    description: "Taze istiridyeler, ıstakoz ve mevsim kabukluları",
   },
   {
     id: "7",
     src: "/placeholder.svg?height=400&width=300",
-    alt: "Private Event",
+    alt: "Özel Etkinlik",
     category: "events",
-    title: "Wedding Reception",
-    description: "Celebrating special moments by the sea",
+    title: "Düğün Resepsiyonu",
+    description: "Deniz kenarında özel anları kutlama",
   },
   {
     id: "8",
     src: "/placeholder.svg?height=300&width=400",
-    alt: "Bar Area",
+    alt: "Bar Alanı",
     category: "restaurant",
-    title: "Cocktail Bar",
-    description: "Craft cocktails and fine wines",
+    title: "Kokteyl Bar",
+    description: "El yapımı kokteyller ve kaliteli şaraplar",
   },
   {
     id: "9",
     src: "/placeholder.svg?height=450&width=400",
-    alt: "Pan-Seared Halibut",
+    alt: "Tavada Halibut",
     category: "food",
-    title: "Pan-Seared Halibut",
-    description: "Alaskan halibut with roasted vegetables",
+    title: "Tavada Halibut",
+    description: "Kızarmış sebzeler ile Alaska halibutu",
   },
   {
     id: "10",
     src: "/placeholder.svg?height=300&width=600",
-    alt: "Sunset Dining",
+    alt: "Gün Batımı Yemeği",
     category: "restaurant",
-    title: "Sunset Views",
-    description: "Romantic dining as the sun sets over the harbor",
+    title: "Gün Batımı Manzarası",
+    description: "Liman üzerinde güneş batarken romantik yemek",
   },
   {
     id: "11",
     src: "/placeholder.svg?height=400&width=400",
-    alt: "Corporate Event",
+    alt: "Kurumsal Etkinlik",
     category: "events",
-    title: "Business Dinner",
-    description: "Professional gatherings in elegant surroundings",
+    title: "İş Yemeği",
+    description: "Zarif ortamda profesyonel toplantılar",
   },
   {
     id: "12",
     src: "/placeholder.svg?height=350&width=400",
-    alt: "Kitchen Team",
+    alt: "Mutfak Ekibi",
     category: "chef",
-    title: "Culinary Team",
-    description: "Our passionate kitchen staff",
+    title: "Mutfak Ekibi",
+    description: "Tutkulu mutfak personelimiz",
   },
 ]
 
 const categories = [
-  { id: "all", label: "All Photos", count: galleryImages.length },
-  { id: "food", label: "Our Dishes", count: galleryImages.filter((img) => img.category === "food").length },
-  { id: "restaurant", label: "Restaurant", count: galleryImages.filter((img) => img.category === "restaurant").length },
-  { id: "events", label: "Events", count: galleryImages.filter((img) => img.category === "events").length },
-  { id: "chef", label: "Our Team", count: galleryImages.filter((img) => img.category === "chef").length },
+  { id: "all", label: "Tüm Fotoğraflar", count: galleryImages.length },
+  { id: "food", label: "Yemeklerimiz", count: galleryImages.filter((img) => img.category === "food").length },
+  { id: "restaurant", label: "Restoran", count: galleryImages.filter((img) => img.category === "restaurant").length },
+  { id: "events", label: "Etkinlikler", count: galleryImages.filter((img) => img.category === "events").length },
+  { id: "chef", label: "Ekibimiz", count: galleryImages.filter((img) => img.category === "chef").length },
 ]
 
 export function Gallery() {
@@ -174,11 +174,11 @@ export function Gallery() {
           <div className="flex items-center justify-center mb-6">
             <Camera className="h-8 w-8 text-blue-600 mr-3" />
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent">
-              Photo Gallery
+              Fotoğraf Galerisi
             </h2>
           </div>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Explore the beauty of Ocean's Catch through our curated collection of moments, flavors, and experiences
+            Özenle seçilmiş anlar, lezzetler ve deneyimler koleksiyonumuzla Poyrazköy Balıkçısı'nın güzelliğini keşfedin
           </p>
         </div>
 
@@ -204,99 +204,81 @@ export function Gallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-[200px]">
           {filteredImages.map((image, index) => (
             <div
               key={image.id}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl ${getGridClass(index)}`}
+              className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ${getGridClass(index)}`}
               onClick={() => openLightbox(image)}
             >
               <img
-                src={image.src || "/placeholder.svg"}
+                src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="font-bold text-lg mb-1">{image.title}</h3>
-                  {image.description && <p className="text-sm opacity-90">{image.description}</p>}
-                </div>
-
-                {/* Zoom Icon */}
-                <div className="absolute top-4 right-4">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-2">
-                    <ZoomIn className="h-5 w-5 text-white" />
-                  </div>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="font-semibold text-lg mb-1">{image.title}</h3>
+                {image.description && (
+                  <p className="text-sm text-blue-100">{image.description}</p>
+                )}
               </div>
-
-              {/* Featured Badge */}
               {image.featured && (
-                <Badge className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-teal-500 text-white">
-                  Featured
+                <Badge className="absolute top-3 right-3 bg-orange-500 text-white">
+                  Öne Çıkan
                 </Badge>
               )}
+              <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ZoomIn className="h-6 w-6 text-white" />
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Lightbox Modal */}
+        {/* Lightbox */}
         {selectedImage && (
-          <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
             <div className="relative max-w-4xl max-h-full">
-              {/* Close Button */}
-              <Button
-                variant="outline"
-                size="icon"
-                className="absolute -top-12 right-0 bg-white/10 border-white/20 text-white hover:bg-white/20 z-10"
-                onClick={closeLightbox}
-              >
-                <X className="h-5 w-5" />
-              </Button>
-
-              {/* Navigation Buttons */}
-              {filteredImages.length > 1 && (
-                <>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20"
-                    onClick={goToPrevious}
-                  >
-                    <ChevronLeft className="h-5 w-5" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20"
-                    onClick={goToNext}
-                  >
-                    <ChevronRight className="h-5 w-5" />
-                  </Button>
-                </>
-              )}
-
-              {/* Image */}
               <img
-                src={selectedImage.src || "/placeholder.svg"}
+                src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
               />
-
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                <h3 className="text-white text-2xl font-bold mb-2">{selectedImage.title}</h3>
-                {selectedImage.description && <p className="text-white/90 text-lg">{selectedImage.description}</p>}
-                <div className="flex items-center justify-between mt-4">
-                  <Badge className="bg-white/20 text-white">
-                    {categories.find((cat) => cat.id === selectedImage.category)?.label}
-                  </Badge>
-                  <span className="text-white/70 text-sm">
-                    {currentImageIndex + 1} of {filteredImages.length}
-                  </span>
-                </div>
+              <div className="absolute top-4 right-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={closeLightbox}
+                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+              </div>
+              <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={goToPrevious}
+                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </Button>
+              </div>
+              <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={goToNext}
+                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </Button>
+              </div>
+              <div className="absolute bottom-4 left-4 right-4 text-white text-center">
+                <h3 className="text-xl font-semibold mb-2">{selectedImage.title}</h3>
+                {selectedImage.description && (
+                  <p className="text-blue-200">{selectedImage.description}</p>
+                )}
               </div>
             </div>
           </div>

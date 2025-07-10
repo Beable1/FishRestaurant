@@ -101,7 +101,7 @@ export function Carousel({
               <img src={item.image || "/placeholder.svg"} alt={item.title} className="w-full h-64 object-cover" />
               {item.popular && (
                 <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-                  Popular
+                  Popüler
                 </Badge>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
@@ -251,8 +251,8 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "1",
     type: "dish",
-    title: "Grilled Atlantic Salmon",
-    description: "Fresh Atlantic salmon with lemon herb butter and seasonal vegetables",
+    title: "Izgara Atlantik Somonu",
+    description: "Limon otlu tereyağı ve mevsim sebzeleri ile taze Atlantik somonu",
     image: "/placeholder.svg?height=300&width=400",
     price: "$28",
     rating: 5,
@@ -261,8 +261,8 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "2",
     type: "dish",
-    title: "Lobster Thermidor",
-    description: "Classic preparation with cognac cream sauce, served with rice pilaf",
+    title: "Istakoz Thermidor",
+    description: "Konyak kremalı sos ile klasik hazırlama, pilav pilavı ile servis",
     image: "/placeholder.svg?height=300&width=400",
     price: "$45",
     rating: 5,
@@ -271,8 +271,8 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "3",
     type: "dish",
-    title: "Seafood Tower",
-    description: "Lobster, crab, shrimp, oysters, and clams for two",
+    title: "Deniz Ürünleri Kulesi",
+    description: "İki kişilik ıstakoz, yengeç, karides, istiridye ve midye",
     image: "/placeholder.svg?height=300&width=400",
     price: "$85",
     rating: 5,
@@ -283,22 +283,22 @@ export const restaurantImages: CarouselItem[] = [
   {
     id: "1",
     type: "image",
-    title: "Elegant Dining Room",
-    description: "Experience fine dining in our beautifully appointed main dining room",
+    title: "Zarif Yemek Salonu",
+    description: "Güzelce döşenmiş ana yemek salonumuzda lüks yemek deneyimi yaşayın",
     image: "/placeholder.svg?height=400&width=600",
   },
   {
     id: "2",
     type: "image",
-    title: "Waterfront Terrace",
-    description: "Enjoy your meal with stunning ocean views on our outdoor terrace",
+    title: "Sahil Terası",
+    description: "Dış mekan terasımızda muhteşem okyanus manzarası ile yemeğinizin tadını çıkarın",
     image: "/placeholder.svg?height=400&width=600",
   },
   {
     id: "3",
     type: "image",
-    title: "Private Dining",
-    description: "Host your special events in our intimate private dining spaces",
+    title: "Özel Yemek",
+    description: "Özel etkinliklerinizi samimi özel yemek alanlarımızda düzenleyin",
     image: "/placeholder.svg?height=400&width=600",
   },
 ]
@@ -307,9 +307,9 @@ export const customerTestimonials: CarouselItem[] = [
   {
     id: "1",
     type: "testimonial",
-    title: "Food Critic",
+    title: "Yemek Eleştirmeni",
     description:
-      "Ocean's Catch delivers an exceptional dining experience with the freshest seafood and impeccable service. A true gem by the waterfront.",
+      "Poyrazköy Balıkçısı en taze deniz ürünleri ve kusursuz hizmetle olağanüstü bir yemek deneyimi sunuyor. Sahildeki gerçek bir mücevher.",
     image: "/placeholder.svg?height=100&width=100",
     author: "Sarah Johnson",
     rating: 5,
@@ -317,9 +317,9 @@ export const customerTestimonials: CarouselItem[] = [
   {
     id: "2",
     type: "testimonial",
-    title: "Regular Customer",
+    title: "Düzenli Müşteri",
     description:
-      "I've been coming here for years and it never disappoints. The lobster thermidor is absolutely divine, and the staff treats you like family.",
+      "Yıllardır buraya geliyorum ve hiç hayal kırıklığına uğratmıyor. Istakoz thermidor kesinlikle ilahi ve personel sizi aile gibi karşılıyor.",
     image: "/placeholder.svg?height=100&width=100",
     author: "Michael Chen",
     rating: 5,
@@ -327,9 +327,9 @@ export const customerTestimonials: CarouselItem[] = [
   {
     id: "3",
     type: "testimonial",
-    title: "Wedding Guest",
+    title: "Düğün Misafiri",
     description:
-      "We had our wedding reception here and it was perfect. The food was outstanding and the waterfront setting made our special day unforgettable.",
+      "Düğün resepsiyonumuzu burada yaptık ve mükemmeldi. Yemek olağanüstüydü ve sahil manzarası özel günümüzü unutulmaz kıldı.",
     image: "/placeholder.svg?height=100&width=100",
     author: "Emily Rodriguez",
     rating: 5,
