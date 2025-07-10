@@ -1,0 +1,32 @@
+import { Header } from "@/components/header"
+import { Contact } from "@/components/contact"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+export default function ReservationConfirmedPage() {
+  return (
+    <main className="min-h-screen flex flex-col">
+      <Header />
+      <section className="flex-grow flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-teal-50 p-8">
+        <div className="text-center space-y-6 max-w-xl">
+          <h1 className="text-4xl sm:text-5xl font-bold text-slate-800">
+            Reservation Confirmed
+          </h1>
+          <p className="text-lg sm:text-xl text-slate-600">
+            Thank you for confirming your reservation. We look forward to
+            welcoming you.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/">
+              <Button size="lg">Return Home</Button>
+            </Link>
+            <Link href="/#reservation">
+              <Button size="lg" variant="outline">Book Another</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+      <Contact />
+    </main>
+  )
+}
