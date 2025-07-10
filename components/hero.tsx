@@ -2,8 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { Fish, Phone } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export function Hero() {
+  const router = useRouter()
   return (
     <section
       id="hero"
@@ -42,7 +44,7 @@ export function Hero() {
             size="lg"
             variant="outline"
             className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-3 text-lg bg-transparent"
-            onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => router.push("/menu")}
           >
             View Menu
           </Button>

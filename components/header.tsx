@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Fish, Phone, MapPin, Clock, Menu, X } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,10 +27,13 @@ export function Header() {
     }
   }
 
+  const router = useRouter()
+
   const navigationItems = [
     { label: "Home", id: "hero" },
     { label: "About", id: "about" },
-    { label: "Menu", id: "menu" },
+    { label: "Gallery", path: "/gallery" },
+    { label: "Menu", path: "/menu" },
     { label: "Reservations", id: "reservation" },
     { label: "Contact", id: "contact" },
   ]
@@ -67,7 +71,7 @@ export function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <div className="flex items-center space-x-3 cursor-pointer" onClick={() => scrollToSection("hero")}>
+            <div className="flex items-center space-x-3 cursor-pointer" onClick={() => router.push("/")}>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-teal-500 rounded-full blur-lg opacity-50 animate-pulse p-6 ml-6"></div>
                 
@@ -102,8 +106,10 @@ export function Header() {
             <nav className="hidden lg:flex items-center space-x-8">
               {navigationItems.map((item) => (
                 <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  key={item.label}
+                  onClick={() =>
+                    item.path ? router.push(item.path) : scrollToSection(item.id!)
+                  }
                   className="text-slate-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
                 >
                   {item.label}
@@ -115,7 +121,7 @@ export function Header() {
             {/* Desktop CTA Button */}
             <div className="hidden lg:flex items-center space-x-4">
               <Button
-                onClick={() => scrollToSection("reservation")}
+                onClick={() => router.push("/#reservation")}
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
                 Reserve Table
@@ -139,8 +145,10 @@ export function Header() {
               <nav className="flex flex-col space-y-4">
                 {navigationItems.map((item) => (
                   <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    key={item.label}
+                    onClick={() =>
+                      item.path ? router.push(item.path) : scrollToSection(item.id!)
+                    }
                     className="text-left text-slate-700 hover:text-blue-600 font-medium py-2 px-4 rounded-lg hover:bg-blue-50 transition-all duration-200"
                   >
                     {item.label}
@@ -148,7 +156,10 @@ export function Header() {
                 ))}
                 <div className="pt-4 border-t border-slate-200">
                   <Button
-                    onClick={() => scrollToSection("reservation")}
+                    onClick={() => {
+                      router.push("/#reservation")
+                      setIsMobileMenuOpen(false)
+                    }}
                     className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 rounded-full font-semibold"
                   >
                     Reserve Table
