@@ -271,9 +271,9 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "3",
     type: "dish",
-    title: "Deniz Ürünleri Kulesi",
-    description: "İki kişilik ıstakoz, yengeç, karides, istiridye ve midye",
-    image: "/placeholder.svg?height=300&width=400",
+    title: "Minakop",
+    description: "Tavada kızartılmış minakop",
+    image: "/dishes/minakop.png",
     price: "$85",
     rating: 5,
   },

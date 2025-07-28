@@ -26,7 +26,7 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <div className="flex items-center justify-center text-blue-200">
                 <Phone className="h-5 w-5 mr-2" />
-                <span className="text-lg">(555) 123-FISH</span>
+                <span className="text-lg">0216 320 11 73</span>
               </div>
               <div className="flex items-center justify-center text-blue-200">
                 <Mail className="h-5 w-5 mr-2" />
@@ -159,9 +159,8 @@ export default function ContactPage() {
                   <div className="space-y-3">
                     <p className="text-slate-700 font-medium">Poyrazköy Balıkçısı</p>
                     <p className="text-slate-600 text-sm">
-                      123 Harbor View Drive<br />
-                      Seaside Bay, CA 90210<br />
-                      Sahil Bölgesi
+                      Poyraz, Mendirek Yolu No:14<br />
+                      34829 Beykoz, Istanbul, Turkey
                     </p>
                     <div className="mt-4">
                       <Button variant="outline" className="w-full">
@@ -213,7 +212,14 @@ export default function ContactPage() {
                       <Phone className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
                         <p className="font-medium">Telefon</p>
-                        <p className="text-slate-600 text-sm">(555) 123-FISH</p>
+                        <p className="text-slate-600 text-sm">0216 320 11 73</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <Phone className="h-5 w-5 text-blue-600 mr-3" />
+                      <div>
+                        <p className="font-medium">Mobil</p>
+                        <p className="text-slate-600 text-sm">0531 840 93 12</p>
                       </div>
                     </div>
                     <div className="flex items-center">
@@ -221,13 +227,6 @@ export default function ContactPage() {
                       <div>
                         <p className="font-medium">E-posta</p>
                         <p className="text-slate-600 text-sm">info@poyrazkoybalikcisi.com</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <MessageSquare className="h-5 w-5 text-blue-600 mr-3" />
-                      <div>
-                        <p className="font-medium">Faks</p>
-                        <p className="text-slate-600 text-sm">(555) 123-4567</p>
                       </div>
                     </div>
                   </div>

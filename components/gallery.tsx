@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { X, ZoomIn, ChevronLeft, ChevronRight, Camera } from "lucide-react"
+import { db } from "@/lib/firebase"
+import { collection, getDocs } from "firebase/firestore"
 
 interface GalleryImage {
   id: string
-  src: string
+  imageUrl: string
   alt: string
   category: "food" | "restaurant" | "events" | "chef"
   title: string
@@ -15,122 +17,39 @@ interface GalleryImage {
   featured?: boolean
 }
 
-const galleryImages: GalleryImage[] = [
-  {
-    id: "1",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Izgara Atlantik Somonu",
-    category: "food",
-    title: "Izgara Atlantik Somonu",
-    description: "Limon otlu tereyağı ile taze Atlantik somonu",
-    featured: true,
-  },
-  {
-    id: "2",
-    src: "/placeholder.svg?height=300&width=400",
-    alt: "Restoran İç Mekanı",
-    category: "restaurant",
-    title: "Zarif Yemek Salonu",
-    description: "Güzelce döşenmiş ana yemek alanımız",
-  },
-  {
-    id: "3",
-    src: "/placeholder.svg?height=500&width=400",
-    alt: "Istakoz Thermidor",
-    category: "food",
-    title: "Istakoz Thermidor",
-    description: "Konyak kremalı sos ile klasik hazırlama",
-    featured: true,
-  },
-  {
-    id: "4",
-    src: "/placeholder.svg?height=300&width=500",
-    alt: "Sahil Terası",
-    category: "restaurant",
-    title: "Sahil Terası",
-    description: "Muhteşem okyanus manzarası ile yemek",
-  },
-  {
-    id: "5",
-    src: "/placeholder.svg?height=400&width=400",
-    alt: "Çalışan Şef",
-    category: "chef",
-    title: "Şef Martinez",
-    description: "Günün avını hazırlayan baş şefimiz",
-  },
-  {
-    id: "6",
-    src: "/placeholder.svg?height=350&width=500",
-    alt: "Deniz Ürünleri Kulesi",
-    category: "food",
-    title: "Deniz Ürünleri Kulesi",
-    description: "Taze istiridyeler, ıstakoz ve mevsim kabukluları",
-  },
-  {
-    id: "7",
-    src: "/placeholder.svg?height=400&width=300",
-    alt: "Özel Etkinlik",
-    category: "events",
-    title: "Düğün Resepsiyonu",
-    description: "Deniz kenarında özel anları kutlama",
-  },
-  {
-    id: "8",
-    src: "/placeholder.svg?height=300&width=400",
-    alt: "Bar Alanı",
-    category: "restaurant",
-    title: "Kokteyl Bar",
-    description: "El yapımı kokteyller ve kaliteli şaraplar",
-  },
-  {
-    id: "9",
-    src: "/placeholder.svg?height=450&width=400",
-    alt: "Tavada Halibut",
-    category: "food",
-    title: "Tavada Halibut",
-    description: "Kızarmış sebzeler ile Alaska halibutu",
-  },
-  {
-    id: "10",
-    src: "/placeholder.svg?height=300&width=600",
-    alt: "Gün Batımı Yemeği",
-    category: "restaurant",
-    title: "Gün Batımı Manzarası",
-    description: "Liman üzerinde güneş batarken romantik yemek",
-  },
-  {
-    id: "11",
-    src: "/placeholder.svg?height=400&width=400",
-    alt: "Kurumsal Etkinlik",
-    category: "events",
-    title: "İş Yemeği",
-    description: "Zarif ortamda profesyonel toplantılar",
-  },
-  {
-    id: "12",
-    src: "/placeholder.svg?height=350&width=400",
-    alt: "Mutfak Ekibi",
-    category: "chef",
-    title: "Mutfak Ekibi",
-    description: "Tutkulu mutfak personelimiz",
-  },
-]
-
-const categories = [
-  { id: "all", label: "Tüm Fotoğraflar", count: galleryImages.length },
-  { id: "food", label: "Yemeklerimiz", count: galleryImages.filter((img) => img.category === "food").length },
-  { id: "restaurant", label: "Restoran", count: galleryImages.filter((img) => img.category === "restaurant").length },
-  { id: "events", label: "Etkinlikler", count: galleryImages.filter((img) => img.category === "events").length },
-  { id: "chef", label: "Ekibimiz", count: galleryImages.filter((img) => img.category === "chef").length },
-]
-
 export function Gallery() {
+  const [images, setImages] = useState<GalleryImage[]>([])
+  const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState("all")
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
+  useEffect(() => {
+    async function fetchImages() {
+      setLoading(true)
+      try {
+        const snapshot = await getDocs(collection(db, "gallery"))
+        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as GalleryImage[]
+        setImages(data)
+      } catch (err) {
+        setImages([])
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchImages()
+  }, [])
+
+  const categories = [
+    { id: "all", label: "Tüm Fotoğraflar", count: images.length },
+    { id: "food", label: "Yemeklerimiz", count: images.filter((img) => img.category === "food").length },
+    { id: "restaurant", label: "Restoran", count: images.filter((img) => img.category === "restaurant").length },
+    { id: "events", label: "Etkinlikler", count: images.filter((img) => img.category === "events").length },
+    { id: "chef", label: "Ekibimiz", count: images.filter((img) => img.category === "chef").length },
+  ]
+
   const filteredImages =
-    selectedCategory === "all" ? galleryImages : galleryImages.filter((img) => img.category === selectedCategory)
+    selectedCategory === "all" ? images : images.filter((img) => img.category === selectedCategory)
 
   const openLightbox = (image: GalleryImage) => {
     setSelectedImage(image)
@@ -204,81 +123,64 @@ export function Gallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-[200px]">
-          {filteredImages.map((image, index) => (
-            <div
-              key={image.id}
-              className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ${getGridClass(index)}`}
-              onClick={() => openLightbox(image)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="font-semibold text-lg mb-1">{image.title}</h3>
-                {image.description && (
-                  <p className="text-sm text-blue-100">{image.description}</p>
+        {loading ? (
+          <div className="text-center py-20 text-slate-500 text-lg">Yükleniyor...</div>
+        ) : filteredImages.length === 0 ? (
+          <div className="text-center py-20 text-slate-500 text-lg">Henüz galeriye fotoğraf eklenmedi.</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 auto-rows-[200px] md:auto-rows-[180px]">
+            {filteredImages.map((img, i) => (
+              <div
+                key={img.id}
+                className={`relative group cursor-pointer overflow-hidden rounded-xl shadow-lg bg-white ${getGridClass(i)}`}
+                onClick={() => openLightbox(img)}
+              >
+                <img
+                  src={img.imageUrl}
+                  alt={img.alt || img.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                {img.featured && (
+                  <Badge className="absolute top-3 left-3 bg-orange-500">Öne Çıkan</Badge>
                 )}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                  <h3 className="text-lg font-bold text-white mb-1">{img.title}</h3>
+                  <p className="text-sm text-white/80 line-clamp-2">{img.description}</p>
+                </div>
               </div>
-              {image.featured && (
-                <Badge className="absolute top-3 right-3 bg-orange-500 text-white">
-                  Öne Çıkan
-                </Badge>
-              )}
-              <div className="absolute top-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ZoomIn className="h-6 w-6 text-white" />
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {/* Lightbox */}
+        {/* Lightbox Modal */}
         {selectedImage && (
-          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-            <div className="relative max-w-4xl max-h-full">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
-              />
-              <div className="absolute top-4 right-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={closeLightbox}
-                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
-                >
-                  <X className="h-6 w-6" />
-                </Button>
-              </div>
-              <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={goToPrevious}
-                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </Button>
-              </div>
-              <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={goToNext}
-                  className="bg-white/20 text-white border-white/30 hover:bg-white/30"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </Button>
-              </div>
-              <div className="absolute bottom-4 left-4 right-4 text-white text-center">
-                <h3 className="text-xl font-semibold mb-2">{selectedImage.title}</h3>
-                {selectedImage.description && (
-                  <p className="text-blue-200">{selectedImage.description}</p>
-                )}
+          <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+            <div className="relative max-w-3xl w-full bg-white rounded-xl shadow-2xl overflow-hidden">
+              <button
+                className="absolute top-4 right-4 text-slate-700 hover:text-red-600 z-10"
+                onClick={closeLightbox}
+                aria-label="Kapat"
+              >
+                <X className="h-7 w-7" />
+              </button>
+              <div className="flex items-center justify-between px-6 pt-6">
+                <button onClick={goToPrevious} className="text-slate-700 hover:text-blue-600">
+                  <ChevronLeft className="h-8 w-8" />
+                </button>
+                <div className="flex-1 flex flex-col items-center">
+                  <img
+                    src={selectedImage.imageUrl}
+                    alt={selectedImage.alt || selectedImage.title}
+                    className="max-h-[60vh] w-auto object-contain rounded-lg"
+                  />
+                  <h3 className="text-xl font-bold text-slate-800 mt-4 mb-1">{selectedImage.title}</h3>
+                  <p className="text-slate-600 text-center mb-2">{selectedImage.description}</p>
+                  {selectedImage.featured && <Badge className="bg-orange-500">Öne Çıkan</Badge>}
+                </div>
+                <button onClick={goToNext} className="text-slate-700 hover:text-blue-600">
+                  <ChevronRight className="h-8 w-8" />
+                </button>
               </div>
             </div>
           </div>

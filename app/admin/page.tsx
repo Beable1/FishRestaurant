@@ -34,7 +34,9 @@ import {
   Clock,
   MapPin,
   Mail,
-  Phone
+  Phone,
+  Calendar as CalendarIcon,
+  Filter
 } from "lucide-react"
 
 interface Dish {
@@ -89,6 +91,9 @@ export default function AdminPage() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
   const [selectedReservation, setSelectedReservation] = useState<Reservation | null>(null)
   const router = useRouter()
+  const [reservationStatus, setReservationStatus] = useState('all')
+  const [reservationDate, setReservationDate] = useState('')
+  const [reservationSection, setReservationSection] = useState('all')
 
   // Auth state listener
   useEffect(() => {
@@ -107,6 +112,18 @@ export default function AdminPage() {
       loadReservations()
     }
   }, [user])
+
+  // Reload reservations when filters change
+  useEffect(() => {
+    if (user) {
+      loadReservations({
+        status: reservationStatus,
+        date: reservationDate,
+        section: reservationSection
+      })
+    }
+    // eslint-disable-next-line
+  }, [reservationStatus, reservationDate, reservationSection, user])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -156,11 +173,14 @@ export default function AdminPage() {
     }
   }
 
-  const loadReservations = async () => {
+  const loadReservations = async (filters?: { status?: string, date?: string, section?: string }) => {
     try {
-      const response = await fetch('/api/admin/reservations')
+      let url = '/api/admin/reservations?'
+      if (filters?.status && filters.status !== 'all') url += `status=${filters.status}&`
+      if (filters?.date) url += `date=${filters.date}&`
+      if (filters?.section && filters.section !== 'all') url += `section=${filters.section}&`
+      const response = await fetch(url)
       const data = await response.json()
-      console.log(data)
       if (data.reservations) {
         setReservations(data.reservations)
       }
@@ -684,12 +704,71 @@ export default function AdminPage() {
 
           {/* Reservations Tab */}
           <TabsContent value="reservations" className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-2">
               <h2 className="text-2xl font-bold text-slate-800">Rezervasyon Yönetimi</h2>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-2 items-end">
+                {/* Status Filter */}
+                <div>
+                  <Label className="text-slate-700 text-sm">Durum</Label>
+                  <Select value={reservationStatus} onValueChange={setReservationStatus}>
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Hepsi</SelectItem>
+                      <SelectItem value="pending">Beklemede</SelectItem>
+                      <SelectItem value="confirmed">Onaylandı</SelectItem>
+                      <SelectItem value="cancelled">İptal Edildi</SelectItem>
+                      <SelectItem value="completed">Tamamlandı</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {/* Section Filter */}
+                <div>
+                  <Label className="text-slate-700 text-sm">Bölüm</Label>
+                  <Select value={reservationSection} onValueChange={setReservationSection}>
+                    <SelectTrigger className="w-32">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">Hepsi</SelectItem>
+                      <SelectItem value="indoor">İç Mekan</SelectItem>
+                      <SelectItem value="outdoor">Dış Mekan</SelectItem>
+                      <SelectItem value="bar">Bar</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                {/* Date Filter */}
+                <div>
+                  <Label className="text-slate-700 text-sm">Tarih</Label>
+                  <Input
+                    type="date"
+                    value={reservationDate}
+                    onChange={e => setReservationDate(e.target.value)}
+                    className="w-36"
+                  />
+                </div>
+                {/* Clear Filters Button */}
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setReservationStatus('all');
+                    setReservationDate('');
+                    setReservationSection('all');
+                  }}
+                  className="h-10"
+                >
+                  <Filter className="h-4 w-4 mr-1" /> Temizle
+                </Button>
+                {/* Manual Refresh */}
                 <Button 
                   variant="outline"
-                  onClick={() => loadReservations()}
+                  onClick={() => loadReservations({
+                    status: reservationStatus,
+                    date: reservationDate,
+                    section: reservationSection
+                  })}
+                  className="h-10"
                 >
                   <Eye className="mr-2 h-4 w-4" />
                   Yenile
