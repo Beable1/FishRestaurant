@@ -19,6 +19,10 @@ interface Reservation {
 
 export async function GET(request: NextRequest) {
   try {
+    if (!adminDb) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
     const date = searchParams.get('date')
@@ -60,6 +64,10 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    if (!adminDb) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const body = await request.json()
     const { id, ...updateData } = body
 
@@ -84,6 +92,10 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    if (!adminDb) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
 

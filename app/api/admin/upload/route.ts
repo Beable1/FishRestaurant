@@ -4,6 +4,11 @@ import { storage } from '@/lib/firebase'
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if Firebase is properly initialized
+    if (!storage) {
+      return NextResponse.json({ error: 'Firebase storage not initialized' }, { status: 500 })
+    }
+
     const formData = await request.formData()
     const file = formData.get('file') as File
     

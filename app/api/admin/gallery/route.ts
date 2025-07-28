@@ -4,6 +4,10 @@ import { db } from '@/lib/firebase'
 
 export async function GET() {
   try {
+    if (!db) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const querySnapshot = await getDocs(collection(db, "gallery"))
     const images = querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -19,6 +23,10 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!db) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const body = await request.json()
     const { title, description, category, imageUrl, featured } = body
     
@@ -45,6 +53,10 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    if (!db) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const body = await request.json()
     const { id, ...updateData } = body
     
@@ -59,6 +71,10 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    if (!db) {
+      return NextResponse.json({ error: 'Database not initialized' }, { status: 500 })
+    }
+
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
     

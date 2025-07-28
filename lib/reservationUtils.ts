@@ -26,7 +26,11 @@ export const TIMES = [
 ] as const;
 
 // ----- 3 ▸ Yardımcı: tek sefer koleksiyon okuma -----
-async function fetchTables(section: string): Promise<QuerySnapshot> {
+async function fetchTables(section: string): Promise<QuerySnapshot | null> {
+  if (!adminDb) {
+    console.warn('Firebase Admin not initialized');
+    return null;
+  }
   return adminDb.collection('sections')
                 .doc(section)
                 .collection('tables')
@@ -36,9 +40,14 @@ async function fetchTables(section: string): Promise<QuerySnapshot> {
 // ----- 4 ▸ booked kontrolü tek pass -----
 export async function availableTables(
   section: string, slotId: string,
-  snap?: QuerySnapshot
+  snap?: QuerySnapshot | null
 ): Promise<TableInfo[]> {
   const tblSnap = snap ?? await fetchTables(section);
+  
+  if (!tblSnap) {
+    console.warn('Unable to fetch table data');
+    return [];
+  }
 
   return tblSnap.docs.reduce<TableInfo[]>((arr, d) => {
     if (!d.get(`booked.${slotId}`)) {
@@ -74,6 +83,9 @@ export async function findTablesForSlot(
   section: string, slotId: string, guests: number
 ): Promise<string[] | null> {
   const tblSnap = await fetchTables(section);
+  if (!tblSnap) {
+    return null;
+  }
   const free    = await availableTables(section, slotId, tblSnap);
   return pickTables(free, guests);
 }
@@ -84,6 +96,14 @@ export async function slotAvailability(
 ): Promise<Record<string, boolean>> {
   const availability: Record<string, boolean> = {};
   const tblSnap = await fetchTables(section);
+
+  if (!tblSnap) {
+    // If we can't fetch tables, return false for all times
+    for (const t of TIMES) {
+      availability[t] = false;
+    }
+    return availability;
+  }
 
   for (const t of TIMES) {
     const parsed = parse(date, t);
