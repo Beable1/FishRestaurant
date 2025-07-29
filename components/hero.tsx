@@ -26,27 +26,27 @@ export function Hero() {
     
 
       <div className="relative z-20 text-center text-white px-4 max-w-4xl mx-auto">
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-64 sm:mt-48">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-80 sm:mt-64">
           <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg"
+            size="default"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base"
             onClick={() => document.getElementById("reservation")?.scrollIntoView({ behavior: "smooth" })}
           >
             Rezervasyon Yap
           </Button>
           <Button
-            size="lg"
+            size="default"
             variant="outline"
-            className="border-white text-white hover:bg-white hover:text-blue-900 px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg bg-transparent"
+            className="border-white text-white hover:bg-white hover:text-blue-900 px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base bg-transparent"
             onClick={() => router.push("/menu")}
           >
             Menüyü Görüntüle
           </Button>
         </div>
 
-        <div className="mt-8 sm:mt-12 flex items-center justify-center text-blue-200">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center text-blue-200">
           <Phone className="h-4 w-4 sm:h-5 sm:w-5 mr-1.5 sm:mr-2" />
-          <span className="text-base sm:text-lg">(555) 123-FISH</span>
+          <span className="text-base sm:text-lg"> 0216 320 11 73</span>
         </div>
       </div>
     </section>

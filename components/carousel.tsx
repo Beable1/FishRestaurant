@@ -183,6 +183,42 @@ export function Carousel({
     }
   }
 
+  // Preview card renderer - only shows the card structure without content
+  const renderPreviewCard = (item: CarouselItem) => {
+    switch (item.type) {
+      case "dish":
+        return (
+          <Card className="overflow-hidden bg-slate-200 shadow-xl border-0 h-full">
+            <div className="relative">
+              <div className="w-full h-64 bg-slate-300" />
+            </div>
+            <CardContent className="p-6">
+              <div className="w-full h-32 bg-slate-300 rounded"></div>
+            </CardContent>
+          </Card>
+        )
+
+      case "image":
+        return (
+          <div className="relative h-full rounded-2xl overflow-hidden bg-slate-200">
+            <div className="w-full h-full bg-slate-300" />
+          </div>
+        )
+
+      case "testimonial":
+        return (
+          <Card className="bg-slate-200 shadow-xl border-0 h-full flex flex-col justify-center">
+            <CardContent className="p-8 text-center">
+              <div className="w-full h-48 bg-slate-300 rounded"></div>
+            </CardContent>
+          </Card>
+        )
+
+      default:
+        return null
+    }
+  }
+
   return (
     <div
       className={`relative w-full ${className}`}
@@ -192,18 +228,39 @@ export function Carousel({
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Main carousel container */}
-      <div className="relative overflow-hidden rounded-2xl" ref={carouselRef}>
-        <div
-          className="flex transition-transform duration-500 ease-in-out h-96"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {items.map((item) => (
-            <div key={item.id} className="w-full flex-shrink-0 px-2">
-              {renderCarouselItem(item)}
+      {/* Carousel container with preview cards */}
+      <div className="flex items-center justify-center relative">
+        {/* Previous preview card */}
+        {items.length > 1 && (
+          <div className="hidden lg:block absolute left-16 w-64 opacity-25 scale-75 transform transition-all duration-300 z-10">
+            <div className="h-80">
+              {renderPreviewCard(items[(currentIndex - 1 + items.length) % items.length])}
             </div>
-          ))}
+          </div>
+        )}
+
+        {/* Main carousel container */}
+        <div className="relative overflow-hidden rounded-2xl w-full max-w-3xl z-20">
+          <div
+            className="flex transition-transform duration-500 ease-in-out h-96"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {items.map((item) => (
+              <div key={item.id} className="w-full flex-shrink-0 px-2">
+                {renderCarouselItem(item)}
+              </div>
+            ))}
+          </div>
         </div>
+
+        {/* Next preview card */}
+        {items.length > 1 && (
+          <div className="hidden lg:block absolute right-16 w-64 opacity-25 scale-75 transform transition-all duration-300 z-10">
+            <div className="h-80">
+              {renderPreviewCard(items[(currentIndex + 1) % items.length])}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Navigation arrows */}
@@ -251,21 +308,21 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "1",
     type: "dish",
-    title: "Izgara Atlantik Somonu",
-    description: "Limon otlu tereyağı ve mevsim sebzeleri ile taze Atlantik somonu",
-    image: "/placeholder.svg?height=300&width=400",
+    title: "Izgara Kalkan",
+    description: "Limon otlu tereyağı ve mevsim sebzeleri ile taze Kalkan",
+    image: "/dishes/kalkan.jpg?height=300&width=400",
     price: "$28",
-    rating: 5,
+    
     popular: true,
   },
   {
     id: "2",
     type: "dish",
-    title: "Istakoz Thermidor",
-    description: "Konyak kremalı sos ile klasik hazırlama, pilav pilavı ile servis",
-    image: "/placeholder.svg?height=300&width=400",
+    title: "İstavrit Tava",
+    description: "Müthiş görüntüsü ile klasik hazırlama İstavrit tava",
+    image: "/dishes/istavrit.jpg?height=300&width=400",
     price: "$45",
-    rating: 5,
+    
     popular: true,
   },
   {
@@ -275,7 +332,7 @@ export const featuredDishes: CarouselItem[] = [
     description: "Tavada kızartılmış minakop",
     image: "/dishes/minakop.png",
     price: "$85",
-    rating: 5,
+   popular: true,
   },
 ]
 
@@ -283,23 +340,23 @@ export const restaurantImages: CarouselItem[] = [
   {
     id: "1",
     type: "image",
-    title: "Zarif Yemek Salonu",
-    description: "Güzelce döşenmiş ana yemek salonumuzda lüks yemek deneyimi yaşayın",
-    image: "/placeholder.svg?height=400&width=600",
+    title: "Zarif Yemek Alanı",
+    description: "Güzelce hazırlanmış ana yemek bölümümüzde lüks yemek deneyimi yaşayın",
+    image: "/outdoor/DısMekan2.jpg?height=400&width=600",
   },
   {
     id: "2",
     type: "image",
     title: "Sahil Terası",
-    description: "Dış mekan terasımızda muhteşem okyanus manzarası ile yemeğinizin tadını çıkarın",
-    image: "/placeholder.svg?height=400&width=600",
+    description: "Özenle hazırlanmış mekanımızda muhteşem Boğaz manzarası ile yemeğinizin tadını çıkarın",
+    image: "/outdoor/DısMekan1.jpg?height=400&width=600",
   },
   {
     id: "3",
     type: "image",
     title: "Özel Yemek",
     description: "Özel etkinliklerinizi samimi özel yemek alanlarımızda düzenleyin",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/outdoor/DısMekan3.jpg?height=400&width=600",
   },
 ]
 

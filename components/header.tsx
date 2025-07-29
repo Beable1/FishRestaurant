@@ -35,9 +35,9 @@ export function Header() {
 
   const navigationItems = [
     { label: "Ana Sayfa", section: "hero", href: "/#hero" },
-    { label: "Hakkımızda", section: "about", href: "/#about" },
+    { label: "Hakkımızda", href: "/about" },
     { label: "Galeri", href: "/gallery" },
-    { label: "Menü", href: "/menu" },
+    { label: "Menü", href: "https://view.qrall.co/tr?tenantId=3a17002c-05ec-8d85-f2fe-1b5946e9ad7d&channelId=3a17002c-50bf-5261-7a37-fbe11e8c48fc", external: true },
     { label: "Rezervasyon", section: "reservation", href: "/#reservation" },
     { label: "İletişim", href: "/contact" },
 
@@ -86,7 +86,7 @@ export function Header() {
             {/* Logo */}
             <div className="flex items-center space-x-3 cursor-pointer" onClick={() => router.push("/")}>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-teal-500 rounded-full blur-lg opacity-50 animate-pulse p-6 ml-6"></div>
+                <div className="absolute  p-6 ml-6"></div>
                 
 
                  <Image
@@ -122,7 +122,9 @@ export function Header() {
                   key={item.label}
 
                   onClick={() => {
-                    if (item.section) {
+                    if (item.external) {
+                      window.open(item.href, '_blank')
+                    } else if (item.section) {
                       if (pathname === "/") {
                         scrollToSection(item.section)
                       } else {
@@ -179,7 +181,9 @@ export function Header() {
                     key={item.label}
 
                     onClick={() => {
-                      if (item.section) {
+                      if (item.external) {
+                        window.open(item.href, '_blank')
+                      } else if (item.section) {
                         if (pathname === "/") {
                           scrollToSection(item.section)
                         } else {

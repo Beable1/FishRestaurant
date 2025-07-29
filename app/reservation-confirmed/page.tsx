@@ -2,6 +2,17 @@ import { Header } from "@/components/header"
 import { Contact } from "@/components/contact"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Rezervasyon Onaylandı",
+  description: "Rezervasyonunuz başarıyla onaylandı. Poyrazköy Balıkçısı'nda sizi ağırlamayı sabırsızlıkla bekliyoruz.",
+  keywords: ["rezervasyon onaylandı", "başarılı rezervasyon", "onay sayfası"],
+  robots: {
+    index: false,
+    follow: false
+  }
+}
 
 export default function ReservationConfirmedPage() {
   return (

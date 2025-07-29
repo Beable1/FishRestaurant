@@ -264,7 +264,7 @@ const handleInputChange = (field: string, value: string) => {
                 </CardHeader>
                 <CardContent className="p-4 sm:p-6">
                   <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-600">
-                    <li>• Rezervasyonlar 30 dakika geçerlidir</li>
+                    
                     <li>• 6 kişiden fazla gruplar için önceden arama yapın</li>
                     <li>• Özel etkinlikler için 48 saat önceden haber verin</li>
                     <li>• İptal için en az 2 saat önceden bilgi verin</li>

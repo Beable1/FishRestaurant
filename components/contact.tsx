@@ -62,6 +62,23 @@ export function Contact() {
           </Card>
         </div>
 
+        {/* Google Maps */}
+        <div className="mt-8 sm:mt-12">
+          <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-300 text-center">Konumumuz</h4>
+          <div className="flex justify-center">
+            <div className="w-full max-w-4xl">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d96056.13997726813!2d29.049976939010865!3d41.20532833247781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x409fde73ea9020e1%3A0xa73b2e730d4524ad!2zUG95cmF6a8O2eSBCYWzEsWvDp8Sxc8SxLCBQb3lyYXosIE1lbmRpcmVrIFlvbHUsIEJleWtvei_EsHN0YW5idWw!3m2!1d41.2053577!2d29.132378499999998!4m5!1s0x409fde73ea9020e1%3A0xa73b2e730d4524ad!2sPoyrazk%C3%B6y%2C%20Mendirek%20Yolu%20No%3A14%2C%2034829%20Beykoz%2F%C4%B0stanbul!3m2!1d41.2053577!2d29.132378499999998!5e0!3m2!1str!2str!4v1753793498835!5m2!1str!2str" 
+                className="w-full h-64 sm:h-80 md:h-96 rounded-lg border-2 border-slate-600"
+                style={{border: 0}} 
+                allowFullScreen={true}
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Social Media Buttons */}
         <div className="mt-8 sm:mt-12 text-center">
           <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-300">Bizi Takip Edin</h4>

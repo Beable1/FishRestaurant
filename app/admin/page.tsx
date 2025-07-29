@@ -558,10 +558,7 @@ export default function AdminPage() {
                         <div>
                           <p className="font-medium text-slate-800">{reservation.name}</p>
                           <p className="text-sm text-slate-600">
-                            {new Date(reservation.date).toLocaleDateString('tr-TR')} - {new Date(reservation.time).toLocaleTimeString('tr-TR', { 
-                              hour: '2-digit', 
-                              minute: '2-digit' 
-                            })}
+                            {reservation.date} - {reservation.time}
                           </p>
                         </div>
                         <Badge 
@@ -803,16 +800,13 @@ export default function AdminPage() {
                           <div className="flex items-center space-x-2">
                             <Calendar className="h-4 w-4 text-slate-500" />
                             <span className="text-slate-700">
-                              {new Date(reservation.date).toLocaleDateString('tr-TR')}
+                              {reservation.date}
                             </span>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Clock className="h-4 w-4 text-slate-500" />
                             <span className="text-slate-700">
-                              {new Date(reservation.time).toLocaleTimeString('tr-TR', { 
-                                hour: '2-digit', 
-                                minute: '2-digit' 
-                              })}
+                              {reservation.time}
                             </span>
                           </div>
                           <div className="flex items-center space-x-2">
