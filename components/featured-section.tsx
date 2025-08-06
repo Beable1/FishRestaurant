@@ -31,15 +31,7 @@ export function FeaturedSection() {
         </div>
 
         {/* Customer Testimonials Carousel */}
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-800 to-blue-800 bg-clip-text text-transparent mb-4 sm:mb-6">
-              Misafirlerimiz Ne Diyor
-            </h2>
-            <p className="text-base xs:text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">Memnun müşterilerimizin yorumlarını okuyun</p>
-          </div>
-          <Carousel items={customerTestimonials} autoPlay={true} autoPlayInterval={7000} />
-        </div>
+       
       </div>
     </section>
   )

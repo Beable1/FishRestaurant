@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { FeaturedSection } from "@/components/featured-section"
 import { Reservation } from "@/components/reservation"
+import { Reviews } from "@/components/reviews"
 import { Contact } from "@/components/contact"
 import { Metadata } from "next"
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Hero />
       <FeaturedSection />
       <Reservation />
+      <Reviews placeId="ChIJ4SCQ6nPen0ARrSRFDXMuO6c" />
       <Contact />
     </main>
   )

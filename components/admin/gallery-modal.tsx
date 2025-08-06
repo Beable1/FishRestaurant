@@ -25,33 +25,7 @@ export function GalleryModal({ isOpen, onClose, image, onSave }: GalleryModalPro
     imageUrl: image?.imageUrl || "",
     featured: image?.featured || false
   })
-  const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
-
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    setUploading(true)
-    try {
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        setFormData(prev => ({ ...prev, imageUrl: data.url }))
-      }
-    } catch (error) {
-      console.error('Upload error:', error)
-    } finally {
-      setUploading(false)
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -115,10 +89,8 @@ export function GalleryModal({ isOpen, onClose, image, onSave }: GalleryModalPro
                   <SelectValue placeholder="Kategori seçin" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="food">Yemeklerimiz</SelectItem>
-                  <SelectItem value="restaurant">Restoran</SelectItem>
-                  <SelectItem value="events">Etkinlikler</SelectItem>
-                  <SelectItem value="chef">Ekibimiz</SelectItem>
+                  <SelectItem value="dishes">Yemeklerimiz</SelectItem>
+                  <SelectItem value="outdoor">Dış Mekan</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -138,33 +110,29 @@ export function GalleryModal({ isOpen, onClose, image, onSave }: GalleryModalPro
             </div>
 
             <div>
-              <Label htmlFor="image" className="text-slate-700 font-medium">
-                Resim *
+              <Label htmlFor="imageUrl" className="text-slate-700 font-medium">
+                Resim URL *
               </Label>
-              <div className="mt-1 space-y-2">
-                <Input
-                  id="image"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="cursor-pointer"
-                />
-                {uploading && (
-                  <div className="flex items-center text-blue-600">
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Yükleniyor...
-                  </div>
-                )}
-                {formData.imageUrl && (
-                  <div className="mt-2">
-                    <img
-                      src={formData.imageUrl}
-                      alt="Preview"
-                      className="w-32 h-32 object-cover rounded-lg border"
-                    />
-                  </div>
-                )}
-              </div>
+              <Input
+                id="imageUrl"
+                value={formData.imageUrl}
+                onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+                required
+                className="mt-1"
+                placeholder="/dishes/resim.jpg veya /outdoor/resim.jpg"
+              />
+              {formData.imageUrl && (
+                <div className="mt-2">
+                  <img
+                    src={formData.imageUrl}
+                    alt="Preview"
+                    className="w-32 h-32 object-cover rounded-lg border"
+                  />
+                </div>
+              )}
+              <p className="text-sm text-slate-500 mt-1">
+                Resim dosyasını public/dishes veya public/outdoor klasörüne ekleyin ve URL'yi buraya yazın.
+              </p>
             </div>
 
             <div className="flex items-center space-x-2">
@@ -178,27 +146,30 @@ export function GalleryModal({ isOpen, onClose, image, onSave }: GalleryModalPro
               </Label>
             </div>
 
-            <div className="flex justify-end space-x-3">
-              <Button type="button" variant="outline" onClick={onClose}>
-                İptal
-              </Button>
-              <Button
-                type="submit"
-                disabled={saving}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-              >
-                {saving ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Kaydediliyor...
-                  </>
-                ) : (
-                  <>
-                    <Save className="mr-2 h-4 w-4" />
-                    Kaydet
-                  </>
-                )}
-              </Button>
+            <div className="flex justify-between items-center">
+              
+              <div className="flex space-x-3">
+                <Button type="button" variant="outline" onClick={onClose}>
+                  İptal
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={saving}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                >
+                  {saving ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Kaydediliyor...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="mr-2 h-4 w-4" />
+                      Kaydet
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </form>
         </CardContent>

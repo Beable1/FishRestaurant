@@ -18,11 +18,28 @@ let db: any = null
 let auth: any = null
 let storage: any = null
 
-if (firebaseConfig.apiKey && firebaseConfig.projectId) {
-  app = getApps().length ? getApp() : initializeApp(firebaseConfig)
-  db = getFirestore(app)
-  auth = getAuth(app)
-  storage = getStorage(app)
+console.log('Firebase config check:')
+console.log('- apiKey:', !!firebaseConfig.apiKey)
+console.log('- projectId:', !!firebaseConfig.projectId)
+console.log('- storageBucket:', !!firebaseConfig.storageBucket)
+
+if (firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.storageBucket) {
+  try {
+    app = getApps().length ? getApp() : initializeApp(firebaseConfig)
+    db = getFirestore(app)
+    auth = getAuth(app)
+    storage = getStorage(app)
+    console.log('✅ Firebase initialized successfully')
+  } catch (error) {
+    console.error('❌ Firebase initialization error:', error)
+  }
+} else {
+  console.error('❌ Firebase config incomplete')
+  console.log('Missing config:', {
+    apiKey: !firebaseConfig.apiKey,
+    projectId: !firebaseConfig.projectId,
+    storageBucket: !firebaseConfig.storageBucket
+  })
 }
 
 export { db, auth, storage }

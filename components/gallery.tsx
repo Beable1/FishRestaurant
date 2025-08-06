@@ -3,15 +3,13 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { X, ZoomIn, ChevronLeft, ChevronRight, Camera } from "lucide-react"
-import { db } from "@/lib/firebase"
-import { collection, getDocs } from "firebase/firestore"
+import { X, ZoomIn, ChevronLeft, ChevronRight, Camera, Star } from "lucide-react"
 
 interface GalleryImage {
   id: string
   imageUrl: string
   alt: string
-  category: "food" | "restaurant" | "events" | "chef"
+  category: "dishes" | "outdoor"
   title: string
   description?: string
   featured?: boolean
@@ -25,27 +23,80 @@ export function Gallery() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
-    async function fetchImages() {
+    // Public klasörlerindeki resimleri yükle
+    const loadPublicImages = () => {
       setLoading(true)
-      try {
-        const snapshot = await getDocs(collection(db, "gallery"))
-        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as GalleryImage[]
-        setImages(data)
-      } catch (err) {
-        setImages([])
-      } finally {
-        setLoading(false)
-      }
+      
+      const dishesImages: GalleryImage[] = [
+        {
+          id: 'istavrit',
+          imageUrl: '/dishes/istavrit.jpg',
+          alt: 'İstavrit Balığı',
+          category: "dishes",
+          title: 'İstavrit Balığı',
+          description: 'Taze yakalanmış istavrit balığı, özel soslarla hazırlanmış',
+          featured: true
+        },
+        {
+          id: 'kalkan',
+          imageUrl: '/dishes/kalkan.jpg',
+          alt: 'Kalkan Balığı',
+          category: "dishes",
+          title: 'Kalkan Balığı',
+          description: 'Denizin incisi kalkan balığı, geleneksel tariflerle',
+          featured: true
+        },
+        {
+          id: 'minakop',
+          imageUrl: '/dishes/minakop.png',
+          alt: 'Minakop Balığı',
+          category: "dishes",
+          title: 'Minakop Balığı',
+          description: 'Taze minakop balığı, özel pişirme teknikleriyle'
+        }
+      ]
+
+      const outdoorImages: GalleryImage[] = [
+        {
+          id: 'dis-mekan1',
+          imageUrl: '/outdoor/DısMekan1.jpg',
+          alt: 'Dış Mekan 1',
+          category: "outdoor",
+          title: 'Dış Mekan',
+          description: 'Deniz manzaralı dış mekanımızda keyifli anlar',
+          featured: true
+        },
+        {
+          id: 'dis-mekan2',
+          imageUrl: '/outdoor/DısMekan2.jpg',
+          alt: 'Dış Mekan 2',
+          category: "outdoor",
+          title: 'Açık Hava',
+          description: 'Temiz hava ve deniz esintisi eşliğinde yemek keyfi'
+        },
+        {
+          id: 'dis-mekan3',
+          imageUrl: '/outdoor/DısMekan3.jpg',
+          alt: 'Dış Mekan 3',
+          category: "outdoor",
+          title: 'Teras',
+          description: 'Geniş terasımızda unutulmaz anlar yaşayın'
+        }
+      ]
+
+      const allImages = [...dishesImages, ...outdoorImages]
+      console.log('Loaded public images:', allImages.length)
+      setImages(allImages)
+      setLoading(false)
     }
-    fetchImages()
+
+    loadPublicImages()
   }, [])
 
   const categories = [
     { id: "all", label: "Tüm Fotoğraflar", count: images.length },
-    { id: "food", label: "Yemeklerimiz", count: images.filter((img) => img.category === "food").length },
-    { id: "restaurant", label: "Restoran", count: images.filter((img) => img.category === "restaurant").length },
-    { id: "events", label: "Etkinlikler", count: images.filter((img) => img.category === "events").length },
-    { id: "chef", label: "Ekibimiz", count: images.filter((img) => img.category === "chef").length },
+    { id: "dishes", label: "Yemeklerimiz", count: images.filter((img) => img.category === "dishes").length },
+    { id: "outdoor", label: "Dış Mekan", count: images.filter((img) => img.category === "outdoor").length },
   ]
 
   const filteredImages =
@@ -176,7 +227,12 @@ export function Gallery() {
                   />
                   <h3 className="text-xl font-bold text-slate-800 mt-4 mb-1">{selectedImage.title}</h3>
                   <p className="text-slate-600 text-center mb-2">{selectedImage.description}</p>
-                  {selectedImage.featured && <Badge className="bg-orange-500">Öne Çıkan</Badge>}
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    {selectedImage.featured && <Badge className="bg-orange-500">Öne Çıkan</Badge>}
+                    <Badge className="bg-blue-500 text-white">
+                      {selectedImage.category === "dishes" ? "Yemekler" : "Dış Mekan"}
+                    </Badge>
+                  </div>
                 </div>
                 <button onClick={goToNext} className="text-slate-700 hover:text-blue-600">
                   <ChevronRight className="h-8 w-8" />

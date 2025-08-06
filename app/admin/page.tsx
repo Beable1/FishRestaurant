@@ -161,13 +161,69 @@ export default function AdminPage() {
 
   const loadGalleryImages = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, "gallery"))
-      const imagesData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt?.toDate() || new Date()
-      })) as GalleryImage[]
-      setGalleryImages(imagesData)
+      // Public klasörlerindeki resimleri yükle
+      const dishesImages: GalleryImage[] = [
+        {
+          id: 'istavrit',
+          title: 'İstavrit Balığı',
+          description: 'Taze yakalanmış istavrit balığı, özel soslarla hazırlanmış',
+          category: 'dishes',
+          imageUrl: '/dishes/istavrit.jpg',
+          featured: true,
+          createdAt: new Date()
+        },
+        {
+          id: 'kalkan',
+          title: 'Kalkan Balığı',
+          description: 'Denizin incisi kalkan balığı, geleneksel tariflerle',
+          category: 'dishes',
+          imageUrl: '/dishes/kalkan.jpg',
+          featured: true,
+          createdAt: new Date()
+        },
+        {
+          id: 'minakop',
+          title: 'Minakop Balığı',
+          description: 'Taze minakop balığı, özel pişirme teknikleriyle',
+          category: 'dishes',
+          imageUrl: '/dishes/minakop.png',
+          featured: false,
+          createdAt: new Date()
+        }
+      ]
+
+      const outdoorImages: GalleryImage[] = [
+        {
+          id: 'dis-mekan1',
+          title: 'Dış Mekan',
+          description: 'Deniz manzaralı dış mekanımızda keyifli anlar',
+          category: 'outdoor',
+          imageUrl: '/outdoor/DısMekan1.jpg',
+          featured: true,
+          createdAt: new Date()
+        },
+        {
+          id: 'dis-mekan2',
+          title: 'Açık Hava',
+          description: 'Temiz hava ve deniz esintisi eşliğinde yemek keyfi',
+          category: 'outdoor',
+          imageUrl: '/outdoor/DısMekan2.jpg',
+          featured: false,
+          createdAt: new Date()
+        },
+        {
+          id: 'dis-mekan3',
+          title: 'Teras',
+          description: 'Geniş terasımızda unutulmaz anlar yaşayın',
+          category: 'outdoor',
+          imageUrl: '/outdoor/DısMekan3.jpg',
+          featured: false,
+          createdAt: new Date()
+        }
+      ]
+
+      const allImages = [...dishesImages, ...outdoorImages]
+      setGalleryImages(allImages)
     } catch (error) {
       console.error("Galeri resimleri yüklenirken hata:", error)
     }
@@ -210,16 +266,10 @@ export default function AdminPage() {
 
   const handleSaveGalleryImage = async (imageData: any) => {
     try {
-      if (selectedImage) {
-        // Update existing image
-        await updateDoc(doc(db, "gallery", selectedImage.id), imageData)
-      } else {
-        // Add new image
-        await addDoc(collection(db, "gallery"), {
-          ...imageData,
-          createdAt: new Date()
-        })
-      }
+      // Public klasörlerindeki resimler için sadece bilgileri güncelle
+      // Gerçek dosya yönetimi için manuel olarak public klasörüne dosya eklenmeli
+      console.log('Gallery image data:', imageData)
+      alert('Resim bilgileri güncellendi. Yeni resim eklemek için dosyayı public klasörüne manuel olarak ekleyin.')
       await loadGalleryImages()
     } catch (error) {
       console.error("Resim kaydedilirken hata:", error)
@@ -239,9 +289,10 @@ export default function AdminPage() {
   }
 
   const handleDeleteGalleryImage = async (imageId: string) => {
-    if (confirm("Bu resmi silmek istediğinizden emin misiniz?")) {
+    if (confirm("Bu resmi silmek istediğinizden emin misiniz? (Dosya public klasöründen manuel olarak silinmeli)")) {
       try {
-        await deleteDoc(doc(db, "gallery", imageId))
+        console.log('Deleting gallery image:', imageId)
+        alert('Resim bilgileri silindi. Dosyayı public klasöründen manuel olarak silin.')
         await loadGalleryImages()
       } catch (error) {
         console.error("Resim silinirken hata:", error)
