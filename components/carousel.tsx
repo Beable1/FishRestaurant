@@ -309,7 +309,7 @@ export const featuredDishes: CarouselItem[] = [
     id: "1",
     type: "dish",
     title: "Zengin Meze Çeşitleri",
-    description: "Mevsim sebzeleri ile taze Meze çeşitleri",
+    description: "Mevsim sebzeleri ile taze meze çeşitleri",
     image: "/dishes/meze.jpg?height=300&width=400",
     
     

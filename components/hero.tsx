@@ -3,9 +3,22 @@
 import { Button } from "@/components/ui/button"
 import { Fish, Phone } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState, useRef } from "react"
 
 export function Hero() {
   const router = useRouter()
+  const [currentVideo, setCurrentVideo] = useState(0)
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)]
+
+  const videos = [
+    "/hero-bg-fixed.mp4",
+    "/Poyrazköy-ortam.MOV"
+  ]
+
+  const handleVideoEnd = () => {
+    setCurrentVideo((prev) => (prev + 1) % videos.length)
+  }
+
   return (
     <section
       id="hero"
@@ -13,14 +26,16 @@ export function Hero() {
     >
       {/* Video background */}
       <video
-      className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none"
-      src="/hero-bg-fixed.mp4"
-      autoPlay
-      loop
-      muted
-      playsInline
-      style={{ width: '100vw', objectFit: 'cover' }}
-    />
+        key={currentVideo}
+        ref={videoRefs[currentVideo]}
+        className="absolute inset-0 w-full h-full object-cover z-[1] pointer-events-none"
+        src={videos[currentVideo]}
+        autoPlay
+        muted
+        playsInline
+        onEnded={handleVideoEnd}
+        style={{ width: '100vw', objectFit: 'cover' }}
+      />
 
       <div className="absolute inset-0 bg-black/20 z-10" />
     
