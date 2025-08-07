@@ -257,7 +257,7 @@ function ReviewImages({ images }: { images: string[] }) {
               {renderStars(reviewsData.rating)}
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-slate-800">{reviewsData.rating.toFixed(1)}</div>
+              {/* Ortalama puan kaldırıldı */}
               <div className="text-slate-600">{reviewsData.totalRatings} değerlendirme</div>
             </div>
           </div>
