@@ -308,10 +308,10 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "1",
     type: "dish",
-    title: "Izgara Kalkan",
-    description: "Limon otlu tereyağı ve mevsim sebzeleri ile taze Kalkan",
-    image: "/dishes/kalkan.jpg?height=300&width=400",
-    price: "$28",
+    title: "Zengin Meze Çeşitleri",
+    description: "Mevsim sebzeleri ile taze Meze çeşitleri",
+    image: "/dishes/meze.jpg?height=300&width=400",
+    
     
     popular: true,
   },
@@ -320,18 +320,27 @@ export const featuredDishes: CarouselItem[] = [
     type: "dish",
     title: "İstavrit Tava",
     description: "Müthiş görüntüsü ile klasik hazırlama İstavrit tava",
-    image: "/dishes/istavrit.jpg?height=300&width=400",
-    price: "$45",
+    image: "/dishes/istavrit-tava.jpg?height=300&width=400",
+   
     
     popular: true,
   },
   {
     id: "3",
     type: "dish",
-    title: "Minakop",
-    description: "Tavada kızartılmış minakop",
-    image: "/dishes/minakop.png",
-    price: "$85",
+    title: "Midye Tava",
+    description: "Tavada kızartılmış Midye",
+    image: "/dishes/midye-tava.jpg?height=300&width=400",
+    
+   popular: true,
+  },
+  {
+    id: "4",
+    type: "dish",
+    title: "Levrek",
+    description: "Tavada kızartılmış Levrek",
+    image: "/dishes/levrek.jpg?height=300&width=400",
+    
    popular: true,
   },
 ]

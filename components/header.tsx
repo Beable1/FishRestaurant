@@ -236,6 +236,13 @@ export function Header() {
         </Button>
         <Button
           size="sm"
+          className="bg-gradient-to-r from-pink-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white rounded-full shadow-lg"
+          onClick={() => window.open('https://instagram.com/poyrazkoybalikcisi/', '_blank')}
+        >
+          <Instagram className="h-4 w-4" />
+        </Button>
+        <Button
+          size="sm"
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg"
           onClick={() => window.open('tel:02163201173', '_self')}
         >
