@@ -72,7 +72,6 @@ const handleInputChange = (field: string, value: string) => {
   setFormData((prev) => ({
     ...prev,
     [field]: value,
-    ...(field === 'date' || field === 'section' || field === 'guests' ? { time: '' } : {}),
   }))
 }
 
