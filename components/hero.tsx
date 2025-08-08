@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Fish, Phone } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export function Hero() {
   const router = useRouter()
@@ -18,6 +18,16 @@ export function Hero() {
   const handleVideoEnd = () => {
     setCurrentVideo((prev) => (prev + 1) % videos.length)
   }
+
+  useEffect(() => {
+    const activeVideoElement = videoRefs[currentVideo].current
+    if (!activeVideoElement) return
+    // Ensure playback starts when switching to the next/first video
+    const playPromise = activeVideoElement.play()
+    if (playPromise && typeof playPromise.then === "function") {
+      playPromise.catch(() => {})
+    }
+  }, [currentVideo])
 
   return (
     <section
