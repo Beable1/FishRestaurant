@@ -1,0 +1,6 @@
+[[plugins]]
+package = "netlify-plugin-inline-functions-env"
+
+  [plugins.inputs]
+  # Inline only the large env to bypass AWS Lambda 4KB env var limit
+  include = ["GOOGLE_SERVICE_ACCOUNT_BASE64"]
