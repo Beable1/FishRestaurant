@@ -41,7 +41,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-center justify-center text-blue-200">
                 <Mail className="h-5 w-5 mr-2" />
-                <span className="text-lg">info@poyrazkoybalikcisi.com</span>
+                <span className="text-lg">poyrazkoybalikcisi@gmail.com</span>
               </div>
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function ContactPage() {
                       <Mail className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
                         <p className="font-medium">E-posta</p>
-                        <p className="text-slate-600 text-sm">info@poyrazkoybalikcisi.com</p>
+                        <p className="text-slate-600 text-sm">poyrazkoybalikcisi@gmail.com</p>
                       </div>
                     </div>
                   </div>

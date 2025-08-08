@@ -61,7 +61,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <Clock className="h-4 w-4" />
-              <span>Her Gün Açık 17:00 - 23:00</span>
+              <span>Her Gün Açık 10:00 - 00:00</span>
             </div>
             <button
               className="text-white hover:text-blue-200 transition-colors"

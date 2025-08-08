@@ -318,8 +318,8 @@ export const featuredDishes: CarouselItem[] = [
   {
     id: "2",
     type: "dish",
-    title: "İstavrit Tava",
-    description: "Müthiş görüntüsü ile klasik hazırlama İstavrit tava",
+    title: "Tekir Tava",
+    description: "Müthiş görüntüsü ile klasik hazırlama Tekir Tava",
     image: "/dishes/istavrit-tava.jpg?height=300&width=400",
    
     

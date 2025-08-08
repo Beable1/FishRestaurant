@@ -41,7 +41,7 @@ export function Contact() {
                 <p>Mobil: 0531 840 93 12</p>
                 <div className="flex items-center mt-1 sm:mt-2">
                   <Mail className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                  <span>info@poyrazkoybalikcisi.com</span>
+                  <span>poyrazkoybalikcisi@gmail.com</span>
                 </div>
               </div>
             </CardContent>
