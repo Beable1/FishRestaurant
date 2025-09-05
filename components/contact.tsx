@@ -54,9 +54,8 @@ export function Contact() {
                 <h4 className="font-semibold text-white text-sm sm:text-base">Çalışma Saatleri</h4>
               </div>
               <div className="text-slate-300 text-xs sm:text-sm space-y-1">
-                <p>Pzt-Per: 17:00 - 22:00</p>
-                <p>Cum-Cmt: 17:00 - 23:00</p>
-                <p>Pazar: 16:00 - 21:00</p>
+                <p>Her Gün: 17:00 - 22:00</p>
+                
               </div>
             </CardContent>
           </Card>
@@ -115,8 +114,8 @@ export function Contact() {
 
         <div className="border-t border-slate-600 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center">
           <p className="text-slate-400 text-xs sm:text-sm">
-            © 2024 Poyrazköy Balıkçısı Restoranı. Tüm hakları saklıdır. |
-            <span className="ml-1 sm:ml-2">Deniz ürünleri mükemmelliği için tutkuyla hazırlandı</span>
+            © 2024 Poyrazköy Balıkçısı Restoranı. Tüm hakları saklıdır. 
+            
           </p>
         </div>
       </div>

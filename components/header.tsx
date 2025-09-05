@@ -38,7 +38,6 @@ export function Header() {
     { label: "Hakkımızda", href: "/about" },
     { label: "Galeri", href: "/gallery" },
     { label: "Menü", href: "https://view.qrall.co/tr?tenantId=3a17002c-05ec-8d85-f2fe-1b5946e9ad7d&channelId=3a17002c-50bf-5261-7a37-fbe11e8c48fc", external: true },
-    { label: "Rezervasyon", section: "reservation", href: "/#reservation" },
     { label: "İletişim", href: "/contact" },
 
   ]
@@ -146,18 +145,10 @@ export function Header() {
             {/* Desktop CTA Button */}
             <div className="hidden lg:flex items-center space-x-4">
               <Button
-
-                onClick={() => {
-                  if (pathname === "/") {
-                    scrollToSection("reservation")
-                  } else {
-                    router.push("/#reservation")
-                  }
-                }}
-
+                onClick={() => window.open('tel:02163201173', '_self')}
                 className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                Masa Rezervasyonu
+                Rezervasyon Yap
               </Button>
             </div>
 
@@ -202,19 +193,10 @@ export function Header() {
                 ))}
                 <div className="pt-4 border-t border-slate-200">
                   <Button
-                    onClick={() => {
-
-                      if (pathname === "/") {
-                        scrollToSection("reservation")
-                      } else {
-                        router.push("/#reservation")
-                      }
-
-                      setIsMobileMenuOpen(false)
-                    }}
+                    onClick={() => { window.open('tel:02163201173', '_self'); setIsMobileMenuOpen(false) }}
                     className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 rounded-lg font-semibold shadow-lg"
                   >
-                    Masa Rezervasyonu
+                    Ara ve Rezervasyon Yap
                   </Button>
                 </div>
               </nav>

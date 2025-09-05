@@ -55,7 +55,7 @@ export function Hero() {
           <Button
             size="default"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base"
-            onClick={() => document.getElementById("reservation")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => window.open('tel:02163201173', '_self')}
           >
             Rezervasyon Yap
           </Button>
