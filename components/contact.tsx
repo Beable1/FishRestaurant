@@ -54,7 +54,7 @@ export function Contact() {
                 <h4 className="font-semibold text-white text-sm sm:text-base">Çalışma Saatleri</h4>
               </div>
               <div className="text-slate-300 text-xs sm:text-sm space-y-1">
-                <p>Her Gün: 17:00 - 22:00</p>
+                <p>Her Gün: 10:00 - 00:00</p>
                 
               </div>
             </CardContent>
