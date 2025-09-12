@@ -18,89 +18,40 @@ interface GalleryImage {
 export function Gallery() {
   const [images, setImages] = useState<GalleryImage[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedCategory, setSelectedCategory] = useState("outdoor")
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
-    // Public klasörlerindeki resimleri yükle
-    const loadPublicImages = () => {
-      setLoading(true)
-      
-      const dishesImages: GalleryImage[] = [
-        {
-          id: 'istavrit',
-          imageUrl: '/dishes/istavrit.jpg',
-          alt: 'İstavrit Balığı',
-          category: "dishes",
-          title: 'İstavrit Balığı',
-          description: 'Taze yakalanmış istavrit balığı, özel soslarla hazırlanmış',
-          featured: true
-        },
-        {
-          id: 'kalkan',
-          imageUrl: '/dishes/kalkan.jpg',
-          alt: 'Kalkan Balığı',
-          category: "dishes",
-          title: 'Kalkan Balığı',
-          description: 'Denizin incisi kalkan balığı, geleneksel tariflerle',
-          featured: true
-        },
-        {
-          id: 'minakop',
-          imageUrl: '/dishes/minakop.png',
-          alt: 'Minakop Balığı',
-          category: "dishes",
-          title: 'Minakop Balığı',
-          description: 'Taze minakop balığı, özel pişirme teknikleriyle'
-        }
-      ]
-
-      const outdoorImages: GalleryImage[] = [
-        {
-          id: 'dis-mekan1',
-          imageUrl: '/outdoor/DısMekan1.jpg',
-          alt: 'Dış Mekan 1',
-          category: "outdoor",
-          title: 'Dış Mekan',
-          description: 'Deniz manzaralı dış mekanımızda keyifli anlar',
-          featured: true
-        },
-        {
-          id: 'dis-mekan2',
-          imageUrl: '/outdoor/DısMekan2.jpg',
-          alt: 'Dış Mekan 2',
-          category: "outdoor",
-          title: 'Açık Hava',
-          description: 'Temiz hava ve deniz esintisi eşliğinde yemek keyfi'
-        },
-        {
-          id: 'dis-mekan3',
-          imageUrl: '/outdoor/DısMekan3.jpg',
-          alt: 'Dış Mekan 3',
-          category: "outdoor",
-          title: 'Teras',
-          description: 'Geniş terasımızda unutulmaz anlar yaşayın'
-        }
-      ]
-
-      const allImages = [...dishesImages, ...outdoorImages]
-      console.log('Loaded public images:', allImages.length)
-      setImages(allImages)
-      setLoading(false)
+    const fetchOutdoorImages = async () => {
+      try {
+        setLoading(true)
+        const res = await fetch('/api/outdoor')
+        const data = await res.json()
+        const outdoorImages: GalleryImage[] = (data.images || []).map((img: any) => ({
+          id: img.id,
+          imageUrl: img.imageUrl,
+          alt: img.alt || 'Dış Mekan',
+          category: 'outdoor',
+          title: img.title || 'Dış Mekan',
+        }))
+        setImages(outdoorImages)
+      } catch (e) {
+        console.error('Failed to load outdoor images', e)
+        setImages([])
+      } finally {
+        setLoading(false)
+      }
     }
 
-    loadPublicImages()
+    fetchOutdoorImages()
   }, [])
 
   const categories = [
-    { id: "all", label: "Tüm Fotoğraflar", count: images.length },
-    { id: "dishes", label: "Yemeklerimiz", count: images.filter((img) => img.category === "dishes").length },
     { id: "outdoor", label: "Dış Mekan", count: images.filter((img) => img.category === "outdoor").length },
   ]
 
-  const filteredImages =
-    selectedCategory === "all" ? images : images.filter((img) => img.category === selectedCategory)
+  const filteredImages = images.filter((img) => img.category === selectedCategory)
 
   const openLightbox = (image: GalleryImage) => {
     setSelectedImage(image)
@@ -195,10 +146,6 @@ export function Gallery() {
                 {img.featured && (
                   <Badge className="absolute top-3 left-3 bg-orange-500">Öne Çıkan</Badge>
                 )}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                  <h3 className="text-lg font-bold text-white mb-1">{img.title}</h3>
-                  <p className="text-sm text-white/80 line-clamp-2">{img.description}</p>
-                </div>
               </div>
             ))}
           </div>
@@ -225,14 +172,7 @@ export function Gallery() {
                     alt={selectedImage.alt || selectedImage.title}
                     className="max-h-[60vh] w-auto object-contain rounded-lg"
                   />
-                  <h3 className="text-xl font-bold text-slate-800 mt-4 mb-1">{selectedImage.title}</h3>
-                  <p className="text-slate-600 text-center mb-2">{selectedImage.description}</p>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    {selectedImage.featured && <Badge className="bg-orange-500">Öne Çıkan</Badge>}
-                    <Badge className="bg-blue-500 text-white">
-                      {selectedImage.category === "dishes" ? "Yemekler" : "Dış Mekan"}
-                    </Badge>
-                  </div>
+                  
                 </div>
                 <button onClick={goToNext} className="text-slate-700 hover:text-blue-600">
                   <ChevronRight className="h-8 w-8" />
